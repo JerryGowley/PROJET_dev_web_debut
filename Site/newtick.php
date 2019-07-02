@@ -132,7 +132,7 @@ label {
   		<table class="rounded">
   			<tbody>
   				<tr>
-  					<th style="width:15%;">Description : </th>
+  					<th style="width:16.5%;">Description : </th>
   					<td style="width:90%;">
   						<textarea  class="form-control noresize" rows="15" ></textarea>
   					</td>
