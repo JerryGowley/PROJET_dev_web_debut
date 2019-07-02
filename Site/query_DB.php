@@ -31,7 +31,7 @@ if ($link->query($sql) === TRUE) {
 		  text-align: left;
 		}
 		table#t01 {
-		  width: 100%;    
+		  width: 100%;
 		  background-color: #f1f1c1;
 		}
 </style>
@@ -50,9 +50,9 @@ if ($link->query($sql) === TRUE) {
 			<?php
 				$sql = "SELECT * FROM Ticket WHERE id=$id";
 				$result = $link->query($sql);
-				if ($result->num_rows > 0) 
+				if ($result->num_rows > 0)
 				{
-				    while($row = $result->fetch_assoc()) 
+				    while($row = $result->fetch_assoc())
 				    {
 				        echo "<td>" . $row["id"] . "</td>";
 				        echo "<td>" . $row["Client"] . "</td>";
