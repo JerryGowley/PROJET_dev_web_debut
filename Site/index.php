@@ -18,6 +18,8 @@
   <a class="btn btn-primary" href="newtick.php" role="button">Créer un ticket</a>
   <a class="btn btn-primary" href="tickets.php" role="button">Tous les tickets</a>
   <a class="btn btn-primary" href="admin/index.php" role="button">ADMIN</a>
+  <a class="btn btn-primary" href="admin/index.php" role="button">ADMIN</a>
+
 
 </body>
 </html>
