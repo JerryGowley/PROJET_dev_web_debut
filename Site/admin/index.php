@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8" />
-	<title>Report Bleau Admin | Connexion</title>
+	<title>Squicket | Connexion</title>
 	<link rel="stylesheet" media="screen" style="text/css" href="css/SiteAppli.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<link rel="icon" href="../img/favicon.png" type="image/x-icon"/>

@@ -1,30 +1,30 @@
 <?php
-  include ('conn_db.php');
+include ('conn_db.php');
 
-  $sql = "SELECT type as type_salle, COUNT(*) as nb_type FROM salle GROUP BY type";
-  $sql2 ="SELECT Date_ouverture, COUNT(*) as nb_ticket FROM `ticket` WHERE Date_ouverture <> '' GROUP BY Date_ouverture";
+$sql = "SELECT type as type_salle, COUNT(*) as nb_type FROM salle GROUP BY type";
+$sql2 ="SELECT Date_ouverture, COUNT(*) as nb_ticket FROM `ticket` WHERE Date_ouverture <> '' GROUP BY Date_ouverture";
 
-  $sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  $sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-  $sth->execute();
-  $sth2->execute();
+$sth->execute();
+$sth2->execute();
 
-  $dataPoints=array(array());
-  $dataPoints2=array(array());
+$dataPoints=array(array());
+$dataPoints2=array(array());
 
-  $i = 0;
-      foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
-      {
-          $dataPoints[$i] = array("label" => $row->type_salle, "symbol" => $row->type_salle,"y" => $row->nb_type);
-          $i++;
-      }
-  $i = 0;
-    foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $row)
-      {
-          $dataPoints2[$i] = array("y" => $row->nb_ticket, "label" => $row->Date_ouverture);
-          $i++;
-      }
+$i = 0;
+foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
+{
+  $dataPoints[$i] = array("label" => $row->type_salle, "symbol" => $row->type_salle,"y" => $row->nb_type);
+  $i++;
+}
+$i = 0;
+foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $row)
+{
+  $dataPoints2[$i] = array("y" => $row->nb_ticket, "label" => $row->Date_ouverture);
+  $i++;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,41 +33,41 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script>
   window.onload = function() {
-   
-  var chart = new CanvasJS.Chart("chartContainer", {
-    theme: "light2",
-    animationEnabled: true,
-    title: {
-      text: "Type de salle"
-    },
-    data: [{
-      type: "doughnut",
-      indexLabel: "{symbol} - {y}",
-      yValueFormatString: "#,##0\"\"",
-      showInLegend: true,
-      legendText: "{label} : {y}",
-      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-    }]
-  });
-  chart.render();
 
-  var chart2 = new CanvasJS.Chart("chartContainer2", {
-  animationEnabled: true,
-  theme: "light2",
-  title:{
-    text: "Nombre de ticket par jours"
-  },
-  axisY: {
-    title: "Nombre de ticket"
-  },
-  data: [{
-    type: "column",
-    yValueFormatString: "#,##0.## tickets",
-    dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
-  }]
-});
-chart2.render();
-   
+    var chart = new CanvasJS.Chart("chartContainer", {
+      theme: "light2",
+      animationEnabled: true,
+      title: {
+        text: "Type de salle"
+      },
+      data: [{
+        type: "doughnut",
+        indexLabel: "{symbol} - {y}",
+        yValueFormatString: "#,##0\"\"",
+        showInLegend: true,
+        legendText: "{label} : {y}",
+        dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+      }]
+    });
+    chart.render();
+
+    var chart2 = new CanvasJS.Chart("chartContainer2", {
+      animationEnabled: true,
+      theme: "light2",
+      title:{
+        text: "Nombre de ticket par jours"
+      },
+      axisY: {
+        title: "Nombre de ticket"
+      },
+      data: [{
+        type: "column",
+        yValueFormatString: "#,##0.## tickets",
+        dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
+      }]
+    });
+    chart2.render();
+
   }
   </script>
 
