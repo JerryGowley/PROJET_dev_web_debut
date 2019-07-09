@@ -31,11 +31,13 @@ function tri($type,$argument,$odre)
 }
 ?>
 <body>
+	<?php error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE); ?>
+
 	<div class="container">
 		<br><br>
 		<a class="btn btn-primary" href="index.php" role="button">Retour a l'accueil</a>
-		<br>
-		<input id="myInput" type="text" />
+		<br><br><br>
+		<!-- <input id="myInput" type="text" /> -->
 		<table class="table table-bordered table-condensed table-striped table-hover" id="myTable">
 			<thead class="thead-dark">
 				<tr>
@@ -72,6 +74,10 @@ function tri($type,$argument,$odre)
 						echo "<td>" . $row->Date_fermeture . "</td>";
 						echo "</tr>";
 					}
+
+
+
+			
 					?>
 				</tbody>
 			</table>
@@ -93,7 +99,7 @@ function tri($type,$argument,$odre)
 					function filterTable(event) {
 				    var filter = event.target.value.toUpperCase();
 				    var rows = document.querySelector("#myTable tbody").rows;
-				    
+
 				    for (var i = 0; i < rows.length; i++) {
 				        var col_1 = rows[i].cells[0].textContent.toUpperCase();
 				        var col_2 = rows[i].cells[1].textContent.toUpperCase();
@@ -108,7 +114,7 @@ function tri($type,$argument,$odre)
 				            rows[i].style.display = "";
 				        } else {
 				            rows[i].style.display = "none";
-				        }      
+				        }
 				    }
 				}
 

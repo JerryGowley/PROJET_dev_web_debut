@@ -1,50 +1,52 @@
 <?php
 //session_stat();
 $session_id = 1;
-?>
-<?php
 include ('conn_db.php');
 
 $id_ticket = $_GET['id'];
 
-$sql = "SELECT * FROM Ticket WHERE id = '$id_ticket'";
-$sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-$sth->execute();
-$id_Logiciel = "";
-$id_Client = "";
-$id_Titre_PRB = "";
-$id_Description = "";
-$id_Date_Ouverture = "";
-$id_Date_Fermeture = "";
-$id_Etat = "";
-$id_Technicien = "";
-
-foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
-{
-	$id_Logiciel = $row->Logiciel;
-	$id_Titre_PRB = $row->Titre_PRB;
-	$id_Client = $row->Client;
-	$id_Description = $row->Description;
-	$id_Date_Ouverture = $row->Date_ouverture;
-	$id_Date_Fermeture = $row->Date_fermeture;
-	$id_Etat = $row->Etat;
-	$id_Technicien = $row->Technicien;
+try {
+	$sql = "SELECT * FROM Ticket WHERE id = '$id_ticket'";;
+	$sth=$conexion->prepare($sql,array());
+	$sth->execute();
+} catch (PDOException $e) {
+	echo 'Error: ' . $e->getMessage();
 }
-?>
+foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
+	error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
+	$id = $row->id;
+	$DebutTick = $row->DebutTick;
+	$Logiciel = $row->Logiciel;
+	$sujet = $row->Sujet;
+	$Client = $row->Client;
+	$Description = $row->Description;
+	$technicien = $row->Technicien;
+	$criticite = $row->criticite;
+}
 
+$sql2 = "SELECT * FROM Ticket";
+$sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth2->execute();
+foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
+	$Nom_Logiciel = $raw->Nom_Logiciel;
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<style>
 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/SiteAppli.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<style>
 	table, th, td {
 		border: 1px solid black;
 		border-collapse: collapse;
 		margin-left: 12%;
-
 	}
-
 	.table-row{
 		cursor:pointer;
 	}
@@ -61,32 +63,30 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
 	</style>
 </head>
 <body>
-	<header>
-		<br>
-		<a class="btn btn-primary" href="index.php" style="margin-left: 44%;"role="button">Retour a l'accueil</a>
-		<br> <br>
-
-	</header>
-
+	<?php error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE); ?>
+	<br>
+	<a class="btn btn-primary" href="index.php" style="margin-left: 44%;"role="button">Retour a l'accueil</a>
+	<br> <br>
 	<h1 style="margin-left: 38%;"> Modifier un ticket : </h1>
-	<form>
+	<form method="post">
 		<table class="rounded" >
 			<tbody >
 				<tr >
-					<th colspan="4" align="center">Numero de ticket : <?php echo $id_ticket ?></th>
 				</tr>
 				<tr>
 					<th>
-						<label>Date d'ouverture :</label>
+						<label>Début Incident</label>
 					</th>
 					<td>
-						<input type="text" class="form-control form-control-sm" placeholder="yyyy-mm-dd" required>
+						<form>
+							<input type="text" name="DebutTick"class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
+						</form>
 					</td>
 					<th>
-						<label>Par :</label>
+						<label>Technicien</label>
 					</th>
 					<td>
-						<input type="text" class="form-control form-control-sm" placeholder="Technicien" required>
+						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien" id="Technicien" required>
 					</td>
 				</tr>
 			</tbody>
@@ -94,58 +94,100 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
 		<table class="rounded">
 			<tbody>
 				<tr>
-					<th>Type de probleme :</th>
+					<th style="width:15%;">Logiciel concerné :</th>
 					<td>
-						<select id="inputState" class="custom-select custom-select-sm">
-							<option selected><?php echo $id_Titre_PRB ?></option>
-							<option>Autre</option>
-							<option>Logiciel</option>
-							<option>Matériel</option>
-							<option>Réseau</option>
-						</select>
-					</td>
-					<th>Etat : </th>
-					<td>
-						<select id="inputState" class="custom-select custom-select-sm">
-							<option selected>Ouvert</option>
-							<option>Attribué</option>
-							<option>En cours</option>
-							<option>Clos</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>Logiciel :</th>
-					<td>
-						<select id="inputState" class="custom-select custom-select-sm">
-							<option selected>Choose...</option>
-							<option>...</option>
-						</select>
-					</td>
-					<th>Attribue a :</th>
-					<td>
-						<select id="inputState" class="custom-select custom-select-sm">
-							<option selected>Choose...</option>
-							<option>...</option>
-						</select>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="rounded">
-			<tbody>
-				<tr>
-					<th style="width:10%;">Description :</th>
-					<td style="width:90%;">
-						<textarea  class="form-control noresize" rows="12" ></textarea>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+						<SELECT class="select required form-control select2 select2-offscreen" name="Logiciel" id="Logiciel" required>
+							<option> <?php echo $Logiciel ?> </option>
+							<?php foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw) { ?>
+								<option>  <?php  echo $raw->Nom_Logiciel; ?>></option>
+							<?php  } ?>
 
-	<br>    <input class="btn btn-danger" style="margin-left: 44%;" name="submit" type="submit" value="Soumettre le ticket">
+						</SELECT>
+					</td>
+					<th >Criticité : </th>
+					<td>
+						<br>
+						<select class="select required form-control select2 select2-offscreen" required name="criticite" id="criticite" required>
+							<option value="<?php echo $criticite ?>"><?php echo $criticite?></option>
+							<option value="low">Faible</option>
+							<option value="normal">Normal</option>
+							<option value="important">Important</option>
+							<option value="critical">Critique</option></select>
+							<br>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="1">Sujet :</th>
+						<td colspan="3">
+							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
+							<br>
+						</select>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="rounded">
+			<tbody>
+				<tr>
+					<th style="width:16.5%;">Description : </th>
+					<td style="width:90%;">
+						<textarea  class="form-control noresize" name="Description"  required rows="15" ><?php echo $Description ?></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
+		<br><br><br><input type="submit" style="margin-left: 46%;" class="btn btn-danger" name="supprimer" value="supprimer">
+	</form>
 	<br>
+
+
+<?php
+
+if(isset ($_POST['supprimer']))
+{
+try{
+	$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
+	echo $sql;
+	$sth = $dbs->prepare($sql,array());
+	$sth->execute();
+	header('Location:users.php');
+	exit();
+} catch (PDOException $e) {
+	echo 'Error: ' . $e->getMessage();
+}
+}
+if (isset ($_POST['valider'])){
+$DebutTick=$_POST['DebutTick'];
+$Technicien=$_POST['Technicien'];
+$Logiciel=$_POST['Logiciel'];
+$criticite=$_POST['criticite'];
+$sujet=$_POST['sujet'];
+$Description=$_POST['Description'];
+
+try {
+	$sql = "UPDATE Ticket
+	SET
+	DebutTick='".$DebutTick."'
+	, Logiciel='".$Logiciel."'
+	, Sujet='".$sujet."'
+	, Description ='".$Description."'
+	, Technicien='".$Technicien."'
+	, criticite='".$criticite."'
+	WHERE id='".$id_ticket."'";
+	echo $sql;
+
+	$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+	$sth->execute();
+	header('Location:users.php');
+	exit();
+} catch (PDOException $e) {
+	echo 'Error: ' . $e->getMessage();
+}
+}
+?>
+
 
 	<footer>
 
