@@ -172,44 +172,20 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 			DebutTick='".$DebutTick."'
 			, Logiciel='".$Logiciel."'
 			, Sujet='".$sujet."'
-			, Description ='".$escaped_item."'
+			, Description =".$conexion->quote($Description)."
 			, Technicien='".$Technicien."'
 			, criticite='".$criticite."'
 			WHERE id='".$id_ticket."'";
 			echo $sql;
-			//
-			//
-			// $sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			// $sth->execute();
 
-
-/////////////////////
-			try{
-				$sql = "SELECT * FROM Ticket WHERE id = '$id_ticket'";;
-				$sth=$conexion->prepare($sql,array());
-
-				$sth->bindParam('DebutTick',$DebutTick,PDO::PARAM_STR);
-				$sth->bindParam('Logiciel',$Logiciel,PDO::PARAM_STR);
-				$sth->bindParam('Sujet',$Sujet,PDO::PARAM_STR);
-				$sth->bindParam('Description',$Description,PDO::PARAM_STR);
-				$sth->bindParam('Technicien',$Technicien,PDO::PARAM_STR);
-				$sth->bindParam('criticite',$criticite,PDO::PARAM_STR);
-
-				$status=$sth->execute();
-
-
-			}catch(PDOException $pdo){
-				echo $pdo->getMessage();
-			}
+			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+			$sth->execute();
+			header('Location:tickets.php');
+			exit();
 		} catch (PDOException $e) {
 			echo 'Error: ' . $e->getMessage();
 		}
-		header('Location:tickets.php');
-		exit();
 	}
-
-	/////////////////////
-
 	?>
 
 	<footer>
