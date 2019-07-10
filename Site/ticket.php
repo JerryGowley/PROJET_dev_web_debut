@@ -138,13 +138,15 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 		</table>
 		<br>
 		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
-		<br><br><br><input type="submit" style="margin-left: 46%;" class="btn btn-danger" name="supprimer" value="supprimer">
+		<br><br><br><input type="submit" style="margin-left: 45%;" class="btn btn-danger" name="supprimer" value="supprimer">
+		<br><br><br>	<a class="btn btn-primary" href="tickets.php" style="margin-left: 45.6%;"role="button">Retour</a>
+
+
 	</form>
 	<br>
 
 
 	<?php
-
 	if(isset ($_POST['supprimer']))
 	{
 		try{
@@ -168,12 +170,13 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 		$Description=$_POST['Description'];
 
 		try {
+			$Description = mysqli_real_escape_string($sth, $_POST['Description']);
 			$sql = "UPDATE Ticket
 			SET
 			DebutTick='".$DebutTick."'
 			, Logiciel='".$Logiciel."'
 			, Sujet='".$sujet."'
-			, Description ='".mysqli_real_escape_string($Description, $_POST['Description'])."'
+			, Description ='".mysqli_real_escape_string($Description)."'
 			, Technicien='".$Technicien."'
 			, criticite='".$criticite."'
 			WHERE id='".$id_ticket."'";
