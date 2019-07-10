@@ -43,13 +43,13 @@ function tri($type,$argument,$odre)
 				<tr>
 					<th scope="col">id</th>
 					<th scope="col">Logiciel</th>
-					<th scope="col">Titre_PRB</th>
+					<th scope="col">Sujet</th>
 					<th scope="col">Etat</th>
 					<th scope="col">Client</th>
 					<th scope="col">Technicien</th>
 					<th scope="col">Description</th>
 					<th scope="col">Date d'ouverture</th>
-					<th scope="col">Date de fermeture</th>
+					<th scope="col">Criticité</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,19 +65,19 @@ function tri($type,$argument,$odre)
 						<?php
 						echo "<th>" . $row->id . "</th>";
 						echo "<td>" . $row->Logiciel."</td>";
-						echo "<td>" . $row->Titre_PRB . "</td>";
+						echo "<td>" . $row->Sujet . "</td>";
 						echo "<td>" . $row->Etat . "</td>";
 						echo "<td>" . $row->Client . "</td>";
 						echo "<td>" . $row->Technicien . "</td>";
 						echo "<td>" . $row->Description ."</td>";
-						echo "<td>" . $row->Date_ouverture . "</td>";
-						echo "<td>" . $row->Date_fermeture . "</td>";
+						echo "<td>" . $row->DebutTick . "</td>";
+						echo "<td>" . $row->criticite . "</td>";
 						echo "</tr>";
 					}
 
 
 
-			
+
 					?>
 				</tbody>
 			</table>

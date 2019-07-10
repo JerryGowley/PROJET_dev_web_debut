@@ -143,50 +143,51 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 	<br>
 
 
-<?php
+	<?php
 
-if(isset ($_POST['supprimer']))
-{
-try{
-	$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
-	echo $sql;
-	$sth = $dbs->prepare($sql,array());
-	$sth->execute();
-	header('Location:users.php');
-	exit();
-} catch (PDOException $e) {
-	echo 'Error: ' . $e->getMessage();
-}
-}
-if (isset ($_POST['valider'])){
-$DebutTick=$_POST['DebutTick'];
-$Technicien=$_POST['Technicien'];
-$Logiciel=$_POST['Logiciel'];
-$criticite=$_POST['criticite'];
-$sujet=$_POST['sujet'];
-$Description=$_POST['Description'];
+	if(isset ($_POST['supprimer']))
+	{
+		try{
+			$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
+			echo $sql;
+			$sth = $conexion->prepare($sql,array());
+			$sth->execute();
+			header('Location:tickets.php');
+			exit();
+		} catch (PDOException $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
 
-try {
-	$sql = "UPDATE Ticket
-	SET
-	DebutTick='".$DebutTick."'
-	, Logiciel='".$Logiciel."'
-	, Sujet='".$sujet."'
-	, Description ='".$Description."'
-	, Technicien='".$Technicien."'
-	, criticite='".$criticite."'
-	WHERE id='".$id_ticket."'";
-	echo $sql;
+	if (isset ($_POST['valider'])){
+		$DebutTick=$_POST['DebutTick'];
+		$Technicien=$_POST['Technicien'];
+		$Logiciel=$_POST['Logiciel'];
+		$criticite=$_POST['criticite'];
+		$sujet=$_POST['sujet'];
+		$Description=$_POST['Description'];
 
-	$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	$sth->execute();
-	header('Location:users.php');
-	exit();
-} catch (PDOException $e) {
-	echo 'Error: ' . $e->getMessage();
-}
-}
-?>
+		try {
+			$sql = "UPDATE Ticket
+			SET
+			DebutTick='".$DebutTick."'
+			, Logiciel='".$Logiciel."'
+			, Sujet='".$sujet."'
+			, Description ='".mysqli_real_escape_string($Description, $_POST['Description'])."'
+			, Technicien='".$Technicien."'
+			, criticite='".$criticite."'
+			WHERE id='".$id_ticket."'";
+			echo $sql;
+
+			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+			$sth->execute();
+			header('Location:tickets.php');
+			exit();
+		} catch (PDOException $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
+	?>
 
 
 	<footer>
