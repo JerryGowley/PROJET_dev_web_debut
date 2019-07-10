@@ -107,6 +107,7 @@
 
   <?php
   if (isset ($_POST['valider'])){
+
     $DebutTick=$_POST['incident_debut'];
     $Logiciel=$_POST['Logiciel'];
     $Sujet=$_POST['sujet'];
@@ -114,10 +115,12 @@
     $Technicien=$_POST['Technicien'];
     $criticite=$_POST['criticite'];
 
+
+    $escaped_item = mysql_escape_string($Description);
+    printf("Chaîne protégée : %s\n", $escaped_item);
+
     try {
-      echo $DebutTick;
-      $sql = "INSERT INTO Ticket(DebutTick,Logiciel,Sujet,Description,Technicien,criticite) VALUES('$DebutTick','$Logiciel','$Sujet','$Description','$Technicien','$criticite')";
-      echo $sql;
+      $sql = "INSERT INTO Ticket(DebutTick,Logiciel,Sujet,Description,Technicien,criticite) VALUES('$DebutTick','$Logiciel','$Sujet',('$Description'),'$Technicien','$criticite')";
       $sth = $conexion->prepare($sql,array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
       $sth->execute();
     } catch (PDOException $e) {

@@ -24,7 +24,7 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 	$criticite = $row->criticite;
 }
 
-$sql2 = "SELECT * FROM Ticket";
+$sql2 = "SELECT * FROM Logiciel";
 $sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth2->execute();
 foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
@@ -138,13 +138,10 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 		</table>
 		<br>
 		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
-		<br><br><br><input type="submit" style="margin-left: 45%;" class="btn btn-danger" name="supprimer" value="supprimer">
-		<br><br><br>	<a class="btn btn-primary" href="tickets.php" style="margin-left: 45.6%;"role="button">Retour</a>
-
-
+		<br><br><input type="submit" style="margin-left: 45%;" class="btn btn-danger" name="supprimer" value="supprimer">
+		<br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 45.6%;"role="button">Retour</a>
 	</form>
 	<br>
-
 
 	<?php
 	if(isset ($_POST['supprimer']))
@@ -164,37 +161,58 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 	if (isset ($_POST['valider'])){
 		$DebutTick=$_POST['DebutTick'];
 		$Technicien=$_POST['Technicien'];
+		$Description=$_POST['Description'];
 		$Logiciel=$_POST['Logiciel'];
 		$criticite=$_POST['criticite'];
 		$sujet=$_POST['sujet'];
-		$Description=$_POST['Description'];
-
+		echo $Description;
 		try {
-			$Description = mysqli_real_escape_string($sth, $_POST['Description']);
 			$sql = "UPDATE Ticket
 			SET
 			DebutTick='".$DebutTick."'
 			, Logiciel='".$Logiciel."'
 			, Sujet='".$sujet."'
-			, Description ='".mysqli_real_escape_string($Description)."'
+			, Description ='".$escaped_item."'
 			, Technicien='".$Technicien."'
 			, criticite='".$criticite."'
 			WHERE id='".$id_ticket."'";
 			echo $sql;
+			//
+			//
+			// $sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+			// $sth->execute();
 
-			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			$sth->execute();
-			header('Location:tickets.php');
-			exit();
+
+/////////////////////
+			try{
+				$sql = "SELECT * FROM Ticket WHERE id = '$id_ticket'";;
+				$sth=$conexion->prepare($sql,array());
+
+				$sth->bindParam('DebutTick',$DebutTick,PDO::PARAM_STR);
+				$sth->bindParam('Logiciel',$Logiciel,PDO::PARAM_STR);
+				$sth->bindParam('Sujet',$Sujet,PDO::PARAM_STR);
+				$sth->bindParam('Description',$Description,PDO::PARAM_STR);
+				$sth->bindParam('Technicien',$Technicien,PDO::PARAM_STR);
+				$sth->bindParam('criticite',$criticite,PDO::PARAM_STR);
+
+				$status=$sth->execute();
+
+
+			}catch(PDOException $pdo){
+				echo $pdo->getMessage();
+			}
 		} catch (PDOException $e) {
 			echo 'Error: ' . $e->getMessage();
 		}
+		header('Location:tickets.php');
+		exit();
 	}
+
+	/////////////////////
+
 	?>
 
-
 	<footer>
-
 	</footer>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
