@@ -22,6 +22,7 @@
 	<br>	<br>
 	<a class="btn btn-primary" href="all_adm.php" role="button">Tous les tickets</a>
 	<button class="btn btn-secondary">Modifier User</button>
+	<a class="btn btn-secondary" href="projet.php" role="button">Gérer les projets</a>
 	<br><br>
 	<?php include('../co.php'); ?>
 

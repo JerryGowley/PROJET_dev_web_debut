@@ -30,9 +30,6 @@ $sth2->execute();
 foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 	$Nom_Logiciel = $raw->Nom_Logiciel;
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,7 +83,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 						<label>Technicien</label>
 					</th>
 					<td>
-						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien" id="Technicien" required>
+						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien" disabled="disabled" id="Technicien" required>
 					</td>
 				</tr>
 			</tbody>
@@ -96,13 +93,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 				<tr>
 					<th style="width:15%;">Logiciel concerné :</th>
 					<td>
-						<SELECT class="select required form-control select2 select2-offscreen" name="Logiciel" id="Logiciel" required>
-							<option> <?php echo $Logiciel ?> </option>
-							<?php foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw) { ?>
-								<option>  <?php  echo $raw->Nom_Logiciel; ?>></option>
-							<?php  } ?>
-
-						</SELECT>
+						<input size ="32" type="text" value="<?php echo $Nom_Logiciel ?>" name="Technicien" disabled="disabled" id="Technicien" required>
 					</td>
 					<th >Criticité : </th>
 					<td>
@@ -119,7 +110,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 					<tr>
 						<th colspan="1">Sujet :</th>
 						<td colspan="3">
-							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
+							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" disabled="disabled" name="sujet" id="sujet" required>
 							<br>
 						</select>
 					</td>
@@ -138,25 +129,11 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 		</table>
 		<br>
 		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
-		<br><br><input type="submit" style="margin-left: 45%;" class="btn btn-danger" name="supprimer" value="supprimer">
 		<br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 45.6%;"role="button">Retour</a>
 	</form>
 	<br>
 
 	<?php
-	if(isset ($_POST['supprimer']))
-	{
-		try{
-			$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
-			echo $sql;
-			$sth = $conexion->prepare($sql,array());
-			$sth->execute();
-			header('Location:tickets.php');
-			exit();
-		} catch (PDOException $e) {
-			echo 'Error: ' . $e->getMessage();
-		}
-	}
 
 	if (isset ($_POST['valider'])){
 		$DebutTick=$_POST['DebutTick'];
@@ -170,13 +147,9 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 			$sql = "UPDATE Ticket
 			SET
 			DebutTick='".$DebutTick."'
-			, Logiciel='".$Logiciel."'
-			, Sujet='".$sujet."'
 			, Description =".$conexion->quote($Description)."
-			, Technicien='".$Technicien."'
 			, criticite='".$criticite."'
 			WHERE id='".$id_ticket."'";
-			echo $sql;
 
 			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->execute();
