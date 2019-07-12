@@ -1,7 +1,8 @@
 <?php
 //session_stat();
 $session_id = 1;
-include ('conn_db.php');
+include ('./ScriptPHP/verif.php');
+include ('../conn_db.php');
 
 $id_ticket = $_GET['id'];
 
@@ -24,19 +25,26 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 	$criticite = $row->criticite;
 }
 
-$sql2 = "SELECT * FROM Logiciel";
-$sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-$sth2->execute();
-foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
-	$Nom_Logiciel = $raw->Nom_Logiciel;
+try {
+	$sql2 = "SELECT * FROM Logiciel";
+	$sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+	$sth2->execute();
+	foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
+		$Nom_Logiciel = $raw->Nom_Logiciel;
+	}
 }
+catch (PDOException $e) {
+	echo 'Error: ' . $e->getMessage();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/SiteAppli.css">
+	<link rel="stylesheet" href="../css/SiteAppli.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	<style>
 	table, th, td {
@@ -62,7 +70,6 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 <body>
 	<?php error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE); ?>
 	<br>
-	<a class="btn btn-primary" href="index.php" style="margin-left: 44%;"role="button">Retour a l'accueil</a>
 	<br> <br>
 	<h1 style="margin-left: 38%;"> Modifier un ticket : </h1>
 	<form method="post">
@@ -83,7 +90,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 						<label>Technicien</label>
 					</th>
 					<td>
-						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien" disabled="disabled" id="Technicien" required>
+						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien" id="Technicien" required>
 					</td>
 				</tr>
 			</tbody>
@@ -93,7 +100,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 				<tr>
 					<th style="width:15%;">Logiciel concerné :</th>
 					<td>
-						<input size ="32" type="text" value="<?php echo $Nom_Logiciel ?>" name="Technicien" disabled="disabled" id="Technicien" required>
+						<input size ="32" type="text" value="<?php echo $Nom_Logiciel ?>" name="Logiciel" id="Logiciel" required>
 					</td>
 					<th >Criticité : </th>
 					<td>
@@ -110,7 +117,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 					<tr>
 						<th colspan="1">Sujet :</th>
 						<td colspan="3">
-							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" disabled="disabled" name="sujet" id="sujet" required>
+							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
 							<br>
 						</select>
 					</td>
@@ -129,13 +136,25 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 		</table>
 		<br>
 		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
-		<br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 45.6%;"role="button">Retour</a>
+		<br><br><input type="submit" style="margin-left: 45%;" class="btn btn-danger" name="supprimer" value="supprimer">
+		<br><br><a class="btn btn-primary" href="index_adm.php" style="margin-left: 45.6%;"role="button">Retour</a>
 	</form>
-	<br>
-	<input class="btn btn-danger" style="margin-left: 44%;" name="submit" type="submit" value="Soumettre le ticket">
 	<br>
 
 	<?php
+	if(isset ($_POST['supprimer']))
+	{
+		try{
+			$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
+			echo $sql;
+			$sth = $conexion->prepare($sql,array());
+			$sth->execute();
+			header('Location:all_adm.php');
+			exit();
+		} catch (PDOException $e) {
+			echo 'Error: ' . $e->getMessage();
+		}
+	}
 
 	if (isset ($_POST['valider'])){
 		$DebutTick=$_POST['DebutTick'];
@@ -149,13 +168,17 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 			$sql = "UPDATE Ticket
 			SET
 			DebutTick='".$DebutTick."'
+			, Logiciel='".$Logiciel."'
+			, Sujet='".$sujet."'
 			, Description =".$conexion->quote($Description)."
+			, Technicien='".$Technicien."'
 			, criticite='".$criticite."'
 			WHERE id='".$id_ticket."'";
+			echo $sql;
 
 			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->execute();
-			header('Location:tickets.php');
+			header('Location:all_adm.php');
 			exit();
 		} catch (PDOException $e) {
 			echo 'Error: ' . $e->getMessage();

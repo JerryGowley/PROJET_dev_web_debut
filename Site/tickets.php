@@ -30,23 +30,25 @@ function tri($type,$argument,$odre)
 }
 ?>
 <body>
+	<?php error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE); ?>
+
 	<div class="container">
 		<br><br>
 		<a class="btn btn-primary" href="index.php" role="button">Retour a l'accueil</a>
-		<br>
-		<input id="myInput" type="text" />
+		<br><br><br>
+		<!-- <input id="myInput" type="text" /> -->
 		<table class="table table-bordered table-condensed table-striped table-hover" id="myTable">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">id</th>
 					<th scope="col">Logiciel</th>
-					<th scope="col">Titre_PRB</th>
+					<th scope="col">Sujet</th>
 					<th scope="col">Etat</th>
 					<th scope="col">Client</th>
 					<th scope="col">Technicien</th>
 					<th scope="col">Description</th>
 					<th scope="col">Date d'ouverture</th>
-					<th scope="col">Date de fermeture</th>
+					<th scope="col">Criticité</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,13 +64,13 @@ function tri($type,$argument,$odre)
 						<?php
 						echo "<th>" . $row->id . "</th>";
 						echo "<td>" . $row->Logiciel."</td>";
-						echo "<td>" . $row->Titre_PRB . "</td>";
+						echo "<td>" . $row->Sujet . "</td>";
 						echo "<td>" . $row->Etat . "</td>";
 						echo "<td>" . $row->Client . "</td>";
 						echo "<td>" . $row->Technicien . "</td>";
 						echo "<td>" . $row->Description ."</td>";
-						echo "<td>" . $row->Date_ouverture . "</td>";
-						echo "<td>" . $row->Date_fermeture . "</td>";
+						echo "<td>" . $row->DebutTick . "</td>";
+						echo "<td>" . $row->criticite . "</td>";
 						echo "</tr>";
 					}
 					?>
@@ -89,26 +91,26 @@ function tri($type,$argument,$odre)
 				});
 				</script>
 				<script>
-					function filterTable(event) {
-				    var filter = event.target.value.toUpperCase();
-				    var rows = document.querySelector("#myTable tbody").rows;
-				    
-				    for (var i = 0; i < rows.length; i++) {
-				        var col_1 = rows[i].cells[0].textContent.toUpperCase();
-				        var col_2 = rows[i].cells[1].textContent.toUpperCase();
-				        var col_3 = rows[i].cells[2].textContent.toUpperCase();
-				        var col_4 = rows[i].cells[3].textContent.toUpperCase();
-				        var col_5 = rows[i].cells[4].textContent.toUpperCase();
-				        var col_6 = rows[i].cells[5].textContent.toUpperCase();
-				        var col_7 = rows[i].cells[6].textContent.toUpperCase();
-				        var col_8 = rows[i].cells[7].textContent.toUpperCase();
-				        var col_9 = rows[i].cells[8].textContent.toUpperCase();
-				        if (col_1.indexOf(filter) > -1 || col_2.indexOf(filter) > -1 || col_3.indexOf(filter) > -1 || col_4.indexOf(filter) > -1 || col_5.indexOf(filter) > -1 || col_6.indexOf(filter) > -1 || col_7.indexOf(filter) > -1 || col_8.indexOf(filter) > -1 || col_9.indexOf(filter) > -1) {
-				            rows[i].style.display = "";
-				        } else {
-				            rows[i].style.display = "none";
-				        }      
-				    }
+				function filterTable(event) {
+					var filter = event.target.value.toUpperCase();
+					var rows = document.querySelector("#myTable tbody").rows;
+
+					for (var i = 0; i < rows.length; i++) {
+						var col_1 = rows[i].cells[0].textContent.toUpperCase();
+						var col_2 = rows[i].cells[1].textContent.toUpperCase();
+						var col_3 = rows[i].cells[2].textContent.toUpperCase();
+						var col_4 = rows[i].cells[3].textContent.toUpperCase();
+						var col_5 = rows[i].cells[4].textContent.toUpperCase();
+						var col_6 = rows[i].cells[5].textContent.toUpperCase();
+						var col_7 = rows[i].cells[6].textContent.toUpperCase();
+						var col_8 = rows[i].cells[7].textContent.toUpperCase();
+						var col_9 = rows[i].cells[8].textContent.toUpperCase();
+						if (col_1.indexOf(filter) > -1 || col_2.indexOf(filter) > -1 || col_3.indexOf(filter) > -1 || col_4.indexOf(filter) > -1 || col_5.indexOf(filter) > -1 || col_6.indexOf(filter) > -1 || col_7.indexOf(filter) > -1 || col_8.indexOf(filter) > -1 || col_9.indexOf(filter) > -1) {
+							rows[i].style.display = "";
+						} else {
+							rows[i].style.display = "none";
+						}
+					}
 				}
 
 				document.querySelector('#myInput').addEventListener('keyup', filterTable, false);

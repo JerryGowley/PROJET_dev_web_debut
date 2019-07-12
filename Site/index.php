@@ -20,5 +20,6 @@
   <h1 style="color:#4444ff;text-align:center;">Squicket</h1>
   <br><br><br><br><br>
   <p class="titre"> Bienvenue dans squicket ! <br> Tu trouveras toutes les informations utile juste au dessus !</p>
+
 </body>
 </html>
