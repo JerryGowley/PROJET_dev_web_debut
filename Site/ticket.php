@@ -144,7 +144,8 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
 		</table>
 	</form>
 
-	<br>    <input class="btn btn-danger" style="margin-left: 44%;" name="submit" type="submit" value="Soumettre le ticket">
+	<br>
+	<input class="btn btn-danger" style="margin-left: 44%;" name="submit" type="submit" value="Soumettre le ticket">
 	<br>
 
 	<footer>

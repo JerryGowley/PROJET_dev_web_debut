@@ -2,7 +2,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<ul style="width: 77%; margin-left:11.5%;" class="menu">
 		<li><a class="menu" href="index.php" role="button">Home</a></li>
 		<li><a class="menu" href="newtick.php" role="button">Créer un ticket</a></li>

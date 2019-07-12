@@ -1,92 +1,131 @@
 <?php
 include ('conn_db.php');
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+  <style>
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+</style>
+<form method="POST" action="statistiques.php">
+  <input type="date" name="Date_Ant" value="2019-06-24">
+  <input type="date" name="Date_Post" value="2019-06-25">
+  <input type="submit">
+</form>
+<?php
+$date_ant ="";
+$date_post ="";
+if (isset($_POST['Date_Ant']) && isset($_POST['Date_Post'])) 
+{ 
+  $date_ant = $_POST['Date_Ant'];
+  $date_post = $_POST['Date_Post'];
+}
 
-$sql = "SELECT type as type_salle, COUNT(*) as nb_type FROM salle GROUP BY type";
-$sql2 ="SELECT Date_ouverture, COUNT(*) as nb_ticket FROM `ticket` WHERE Date_ouverture <> '' GROUP BY Date_ouverture";
+$sql = "SELECT Logiciel, COUNT(*) as nb_logiciel FROM ticket GROUP BY Logiciel";
+$sql2 ="SELECT Date_ouverture, COUNT(*) as nb_ticket FROM `ticket` WHERE Date_ouverture BETWEEN '". $date_ant ."' AND '". $date_post ."' GROUP BY Date_ouverture";
+$sql3 ="SELECT Technicien, COUNT(*) as nb_ticket FROM ticket WHERE Date_ouverture BETWEEN '". $date_ant ."' AND '". $date_post ."' GROUP BY Technicien;";
+
 
 $sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth3 = $conexion->prepare($sql3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
 $sth->execute();
 $sth2->execute();
+$sth3->execute();
 
 $dataPoints=array(array());
 $dataPoints2=array(array());
+$dataPoints3=array(array());
 
 $i = 0;
-foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
-{
-  $dataPoints[$i] = array("label" => $row->type_salle, "symbol" => $row->type_salle,"y" => $row->nb_type);
-  $i++;
-}
-$i = 0;
-foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $row)
-{
-  $dataPoints2[$i] = array("y" => $row->nb_ticket, "label" => $row->Date_ouverture);
-  $i++;
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Stat</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script>
-  window.onload = function() {
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-      theme: "light2",
-      animationEnabled: true,
-      title: {
-        text: "Type de salle"
-      },
-      data: [{
-        type: "doughnut",
-        indexLabel: "{symbol} - {y}",
-        yValueFormatString: "#,##0\"\"",
-        showInLegend: true,
-        legendText: "{label} : {y}",
-        dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-      }]
-    });
-    chart.render();
-
-    var chart2 = new CanvasJS.Chart("chartContainer2", {
-      animationEnabled: true,
-      theme: "light2",
-      title:{
-        text: "Nombre de ticket par jours"
-      },
-      axisY: {
-        title: "Nombre de ticket"
-      },
-      data: [{
-        type: "column",
-        yValueFormatString: "#,##0.## tickets",
-        dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
-      }]
-    });
-    chart2.render();
-
+foreach($sth3->fetchAll(PDO::FETCH_OBJ) as $row)
+  {
+    $dataPoints3[$i] = array("y" => $row->nb_ticket, "label" => $row->Technicien);
+    $i++;
   }
-  </script>
+  $i = 0;
+  foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row)
+    {
+      $dataPoints[$i] = array("label" => $row->Logiciel, "symbol" => $row->Logiciel,"y" => $row->nb_logiciel);
+      $i++;
+    }
+    $i = 0;
+    foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $row)
+      {
+        $dataPoints2[$i] = array("y" => $row->nb_ticket, "label" => $row->Date_ouverture);
+        $i++;
+      }
+      ?>
 
-</head>
-<body>
-  <div>
-    <div class="row">
-      <div class="col" id="chartContainer" style="height: 370px; width: 0%;"></div>
-      <div class="col" id="chartContainer2" style="height: 370px; width: 0%;"></div>
-    </div>
-  </div>
+      <script>
+        window.onload = function() {
+          var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+              text: "Logiciel"
+            },
+            data: [{
+              type: "doughnut",
+              indexLabel: "{symbol} - {y}",
+              yValueFormatString: "#,##0\"\"",
+              showInLegend: true,
+              legendText: "{label} : {y}",
+              dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+            }]
+          });
+          chart.render();
 
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+          var chart2 = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+              text: "Nombre de ticket entre le <?php echo $_POST['Date_Ant'] . " et le " . $_POST['Date_Post'] ;?>"
+            },
+            axisY: {
+              title: "Nombre de ticket"
+            },
+            data: [{
+              type: "column",
+              yValueFormatString: "#,##0.## tickets",
+              dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
+            }]
+          });
+          chart2.render();
 
-</body>
-</html>
-<?php
+          var chart3 = new CanvasJS.Chart("chartContainer3", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+              text: "Nombre de ticket entre le <?php echo $_POST['Date_Ant'] . " et le " . $_POST['Date_Post'] ;?> par technicien"
+            },
+            axisY: {
+              title: "Nombre de ticket"
+            },
+            data: [{
+              type: "column",
+              yValueFormatString: "# tickets",
+              dataPoints: <?php echo json_encode($dataPoints3, JSON_NUMERIC_CHECK); ?>
+            }]
+          });
+          chart3.render();
 
-?>
+        }
+      </script>
+    </head>
+    <body>
+      <div class="grid-container">
+        <div class="grid-item" id="chartContainer" style="height: 500px;"></div>
+        <div class="grid-item" id="chartContainer2" style="height: 500px;"></div>
+        <div class="grid-item" id="chartContainer3" style="height: 500px;"></div>
+      </div>
+      <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>        <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    </body>
+    </html>

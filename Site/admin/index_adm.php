@@ -1,4 +1,7 @@
-<?php include('./ScriptPHP/verif.php'); ?>
+<?php 
+include('./ScriptPHP/verif.php');
+include('../conn_db.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,9 +24,8 @@
 	</h1>
 	<br>	<br>
 	<a class="btn btn-primary" href="all_adm.php" role="button">Tous les tickets</a>
-	<button class="btn btn-secondary">Modifier User</button>
+	<a class="btn btn-secondary" href="users.php" role="button">Modifier User</a>
 	<br><br>
-	<?php include('../co.php'); ?>
 
 	<br><br>
 </body>
