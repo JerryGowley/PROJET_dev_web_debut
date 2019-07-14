@@ -26,7 +26,7 @@
 </script>
 <body>
 	<h1>Liste des Utilisateurs</h1><br>
-	<a href="all_adm.php" type="button">Revenir a la page de gestion</a><br><br>
+	<a href="index.php" type="button">Revenir a la page de gestion</a><br><br>
 	<a href="AddUser.php" >Ajouter un utilisateur</a><br><br>
 	<label>Champs de recherche</label>
 	<input id="myInput" type="text" placeholder="id, nom, prenom, etc..." />

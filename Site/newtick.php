@@ -47,7 +47,7 @@
           </th>
           <td>
             <form>
-              <input style="margin-left:15%;" type="date" name="incident_debut" required id="incident_debut">
+              <input type="date" name="incident_debut" required id="incident_debut">
             </form>
           </td>
           <th>

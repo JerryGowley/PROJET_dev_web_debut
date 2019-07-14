@@ -24,8 +24,9 @@ include('../conn_db.php');
 	</h1>
 	<br>	<br>
 	<a class="btn btn-primary" href="all_adm.php" role="button">Tous les tickets</a>
-	<button class="btn btn-secondary">Modifier User</button>
+	<a class="btn btn-secondary" href="users.php"">Modifier User</a>
 	<a class="btn btn-secondary" href="projet.php" role="button">Gérer les projets</a>
+	<a class="btn btn-secondary" href="statistiques.php"">Statistiques</a>
 	<br><br>
 
 	<br><br>

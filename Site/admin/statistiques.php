@@ -1,5 +1,5 @@
 <?php
-include ('conn_db.php');
+include ('../header.php');
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -10,11 +10,17 @@ include ('conn_db.php');
     grid-template-columns: auto auto auto;
   }
 </style>
+    </head>
+    <body>
+      <br>
+      <a class="btn btn-primary" href="index_adm.php" role="button">Retour a l'accueil</a>
+      <br><br>
 <form method="POST" action="statistiques.php">
   <input type="date" name="Date_Ant" value="2019-06-24">
   <input type="date" name="Date_Post" value="2019-06-25">
   <input type="submit">
 </form>
+<br><br>
 <?php
 $date_ant ="";
 $date_post ="";
@@ -116,8 +122,6 @@ foreach($sth3->fetchAll(PDO::FETCH_OBJ) as $row)
 
         }
       </script>
-    </head>
-    <body>
       <div class="grid-container">
         <div class="grid-item" id="chartContainer" style="height: 500px;"></div>
         <div class="grid-item" id="chartContainer2" style="height: 500px;"></div>

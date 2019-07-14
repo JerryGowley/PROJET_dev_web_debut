@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php         include ('../conn_db.php');
+  <?php include ('../header.php');
   $sql = "SELECT * FROM Logiciel";
   $sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
   $sth->execute();
