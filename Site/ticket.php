@@ -16,6 +16,7 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 	error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 	$id = $row->id;
 	$DebutTick = $row->DebutTick;
+	$FinTick = $row->FinTick;
 	$Logiciel = $row->Logiciel;
 	$sujet = $row->Sujet;
 	$Client = $row->Client;
@@ -76,7 +77,7 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 					</th>
 					<td>
 						<form>
-							<input type="text" name="DebutTick"class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
+							<input type="text" name="DebutTick" class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
 						</form>
 					</td>
 					<th>
@@ -109,10 +110,15 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 					</tr>
 					<tr>
 						<th colspan="1">Sujet :</th>
-						<td colspan="3">
-							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" disabled="disabled" name="sujet" id="sujet" required>
+						<td>
+							<input size="42" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" disabled="disabled" name="sujet" id="sujet" required>
 							<br>
-						</select>
+					</td>
+					<th>
+						<label>Fin Incident</label>
+					</th>
+					<td>
+							<input type="text" name="FinTick" id="FinTick" class="form-control form-control-sm" value="<?php echo $FinTick ?>" placeholder="yyyy-mm-dd" required>
 					</td>
 				</tr>
 			</tbody>
@@ -129,29 +135,30 @@ foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $raw){
 		</table>
 		<br>
 		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
-		<br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 45.6%;"role="button">Retour</a>
+		<br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 46.2%;"role="button">Retour</a>
 	</form>
-	<br>
-	<input class="btn btn-danger" style="margin-left: 44%;" name="submit" type="submit" value="Soumettre le ticket">
+	<br><br>
 	<br>
 
 	<?php
-
 	if (isset ($_POST['valider'])){
 		$DebutTick=$_POST['DebutTick'];
+		$FinTick=$_POST['FinTick'];
 		$Technicien=$_POST['Technicien'];
 		$Description=$_POST['Description'];
 		$Logiciel=$_POST['Logiciel'];
 		$criticite=$_POST['criticite'];
 		$sujet=$_POST['sujet'];
-		echo $Description;
+		echo $FinTick;
 		try {
 			$sql = "UPDATE Ticket
 			SET
 			DebutTick='".$DebutTick."'
-			, Description =".$conexion->quote($Description)."
-			, criticite='".$criticite."'
+			,FinTick='".$FinTick."'
+			,Description =".$conexion->quote($Description)."
+			,criticite='".$criticite."'
 			WHERE id='".$id_ticket."'";
+			echo $sql;
 
 			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$sth->execute();
