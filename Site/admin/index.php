@@ -15,8 +15,10 @@
 
 	<?php
 	include ('../header.php');
-
-	$res = $link->query("select Login, mdp from Admin");
+	$sql = "SELECT usr_login, usr_pass, usr_fonction FROM utilisateur;";
+	$res = $conexion->prepare($sql);
+	$res->execute();
+	//$res = $link->query("select Login, mdp from Admin");
 	if(isset($res)) {
 		?>
 		<form method="post" action="./ScriptPHP/connexion.php">
