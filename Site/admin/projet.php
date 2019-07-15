@@ -1,7 +1,6 @@
 <?php
 include ('../header.php');
 
-
 if(isset ($_GET['supprimer'])) {
   try{
     $Logiciel=$_GET['Nom_Logiciel'];

@@ -20,7 +20,7 @@ if (document.location.search.match(/type=embed/gi)) {
 }
 </script>
 <?php
-include ('../header.php');
+include ('header.php');
 function tri($type,$argument,$odre)
 {
 	if($type == 1)

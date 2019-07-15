@@ -23,7 +23,7 @@
   <?php
   /* Connexion à la base de donnée */
   // include('conn_db.php');
-  include ('../header.php');
+  include ('header.php');
 
 
   try {

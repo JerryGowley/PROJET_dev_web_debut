@@ -2,7 +2,7 @@
 //session_stat();
 $session_id = 1;
 // include ('conn_db.php');
-include ('../header.php');
+include ('header.php');
 
 $id_ticket = $_GET['id'];
 

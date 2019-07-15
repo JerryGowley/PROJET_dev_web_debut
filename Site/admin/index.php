@@ -17,7 +17,6 @@
 	// include('../co.php');
 	include ('../header.php');
 
-	/* Recupération des différents départements et affichage */
 	$res = $link->query("select Login, mdp from Admin");
 	if(isset($res)) {
 		?>
