@@ -1,12 +1,8 @@
 <?php
-//session_stat();
 $session_id = 1;
 include ('./ScriptPHP/verif.php');
-// include ('../conn_db.php');
 include ('../header.php');
-
 $id_ticket = $_GET['id'];
-
 try {
 	$sql = "SELECT * FROM Ticket WHERE id = '$id_ticket'";;
 	$sth=$conexion->prepare($sql,array());
@@ -25,7 +21,6 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 	$technicien = $row->Technicien;
 	$criticite = $row->criticite;
 }
-
 try {
 	$sql2 = "SELECT * FROM Logiciel";
 	$sth2 = $conexion->prepare($sql2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -37,9 +32,8 @@ try {
 catch (PDOException $e) {
 	echo 'Error: ' . $e->getMessage();
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,73 +67,87 @@ catch (PDOException $e) {
 	<br>
 	<br> <br>
 	<h1 style="margin-left: 38%;"> Modifier un ticket : </h1>
-	<form method="post">
-		<table class="rounded" >
-			<tbody >
-				<tr >
-				</tr>
-				<tr>
-					<th>
-						<label>Début Incident</label>
-					</th>
-					<td>
-						<form>
-							<input type="text" colspan="2" size="56" name="DebutTick"class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
-						</form>
-					</td>
-					<th>
-						<label>Technicien</label>
-					</th>
-					<td>
-						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien" id="Technicien" required>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="rounded">
-			<tbody>
-				<tr>
-					<th style="width:15%;">Logiciel concerné :</th>
-					<td>
-						<input size ="32" type="text" value="<?php echo $Nom_Logiciel ?>" name="Logiciel" id="Logiciel" required>
-					</td>
-					<th >Criticité : </th>
-					<td>
-						<br>
-						<select class="select required form-control select2 select2-offscreen" required name="criticite" id="criticite" required>
-							<option value="<?php echo $criticite ?>"><?php echo $criticite?></option>
-							<option value="low">Faible</option>
-							<option value="normal">Normal</option>
-							<option value="important">Important</option>
-							<option value="critical">Critique</option></select>
-							<br>
-						</td>
-					</tr>
-					<tr>
-						<th colspan="1">Sujet :</th>
-						<td colspan="3">
-							<input size ="102" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
-							<br>
-						</select>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="rounded">
-			<tbody>
-				<tr>
-					<th style="width:16.5%;">Description : </th>
-					<td style="width:90%;">
-						<textarea  class="form-control noresize" name="Description"  required rows="15" ><?php echo $Description ?></textarea>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<br>
-		<input class="btn btn-danger" style="margin-left: 44%;" name="valider" type="submit" required value="Modifier le ticket">
-		<br><br><input type="submit" style="margin-left: 45%;" class="btn btn-danger" name="supprimer" value="supprimer">
-		<br><br><a class="btn btn-primary" href="index_adm.php" style="margin-left: 45.6%;"role="button">Retour</a>
-	</form>
+
+
+	<form  method="post">
+    <table style="margin:auto;" class="rounded" >
+      <tbody>
+        <tr>
+        </tr>
+        <tr>
+          <th>
+            <label>Début Incident</label>
+          </th>
+          <td>
+            <input type="text" style="width:219px;" name="DebutTick" id="DebutTick" class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
+          </td>
+          <th>
+            <label>Technicien</label>
+          </th>
+          <td>
+            <input style="width:200px" type="text" value="<?php echo $technicien ?>" name="Technicien"  id="Technicien" required>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="margin:auto;" class="rounded">
+      <tbody>
+        <tr>
+          <th style="width:15%;">Logiciel concerné :</th>
+          <td>
+            <input style="width:220px" type="text" value="<?php echo $Nom_Logiciel ?>" name="Technicien" id="Technicien" required>
+          </td>
+          <th >Criticité : </th>
+          <td>
+            <br>
+            <select class="select required form-control select2 select2-offscreen" required name="criticite" id="criticite" required>
+              <option value="<?php echo $criticite ?>"><?php echo $criticite?></option>
+              <option value="low">Faible</option>
+              <option value="normal">Normal</option>
+              <option value="important">Important</option>
+              <option value="critical">Critique</option></select>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="1"> Nom Client :</th>
+            <td>
+              <input size="42" placeholder="maximum 255 caractères" type="text" name="client" id="client" required>
+              <br>
+            </td>
+            <th>
+              <label>Fin Incident</label>
+            </th>
+            <td>
+              <input type="text" name="FinTick" id="FinTick" class="form-control form-control-sm" value="<?php echo $FinTick ?>" placeholder="yyyy-mm-dd" required>
+            </td>
+          </tr>
+          <tr>
+            <th> Sujet :</th>
+            <td colspan="3">
+              <input  size="110" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
+              <br>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="margin:auto;" class="rounded">
+        <tbody>
+          <tr>
+            <th style="width:16.5%;">Description : </th>
+            <td style="width:90%;">
+              <textarea  class="form-control noresize" name="Description" required rows="15" ><?php echo $Description ?></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <input class="btn btn-danger" style="margin-left: 47%;" name="valider" type="submit" required value="Créer ticket">
+      <br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 47.8%;"role="button">Retour</a>
+    </form>
+
+		
 	<br>
 
 	<?php

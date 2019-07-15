@@ -14,7 +14,6 @@
 	<br>
 
 	<?php
-	// include('../co.php');
 	include ('../header.php');
 	$sql = "SELECT usr_login, usr_pass, usr_fonction FROM utilisateur;";
 	$res = $conexion->prepare($sql);
