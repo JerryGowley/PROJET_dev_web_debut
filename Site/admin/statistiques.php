@@ -24,8 +24,8 @@ include ('../header.php');
 <?php
 $date_ant ="";
 $date_post ="";
-if (isset($_POST['Date_Ant']) && isset($_POST['Date_Post'])) 
-{ 
+if (isset($_POST['Date_Ant']) && isset($_POST['Date_Post']))
+{
   $date_ant = $_POST['Date_Ant'];
   $date_post = $_POST['Date_Post'];
 }

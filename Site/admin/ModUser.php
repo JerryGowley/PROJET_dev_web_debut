@@ -2,12 +2,11 @@
 <html>
 <head>
 	<style>
-		
+
 /* Bordered form */
 form {
   margin-right: 20%;
   margin-left: 20%;
-
 }
 
 /* Full-width inputs */
@@ -43,7 +42,8 @@ button:hover {
 <body>
 
 	<?php
-	include ('../conn_db.php');
+	// include ('../conn_db.php');
+	include ('../header.php');
 	$id=$_GET['id'];
 	error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 
@@ -56,7 +56,7 @@ button:hover {
 	}
 
 	foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
-				
+
 		}
 		?>
 
@@ -88,7 +88,7 @@ button:hover {
 			<input type="submit" name="valider" value="valider">
 			<input type="submit" name="supprimer" value="supprimer">
 		</form>
-		
+
 <?php
 
 	if(isset ($_POST['supprimer']))
@@ -114,14 +114,14 @@ button:hover {
 		$tel=$_POST['tel'];
 		try {
 
-			$sql = "UPDATE utilisateur 
-			SET usr_nom='".$nom."' 
-			, usr_prenom='".$prenom."' 
-			, usr_email='".$email."' 
+			$sql = "UPDATE utilisateur
+			SET usr_nom='".$nom."'
+			, usr_prenom='".$prenom."'
+			, usr_email='".$email."'
 			, usr_login='".$login."'
-			, usr_pass ='".$mdp."' 
-			, usr_dep='".$depart."' 
-			, usr_ville='".$ville."' 
+			, usr_pass ='".$mdp."'
+			, usr_dep='".$depart."'
+			, usr_ville='".$ville."'
 			, usr_tel='".$tel."'
 			WHERE usr_id='".$id."'";
 
@@ -136,4 +136,4 @@ button:hover {
 	?>
 
 	</body>
-	</html> 
+	</html>

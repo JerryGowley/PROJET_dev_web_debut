@@ -14,8 +14,8 @@
 	<br>
 
 	<?php
-	/* Connexion à la base de donnée */
-	include('../co.php');
+	// include('../co.php');
+	include ('../header.php');
 
 	/* Recupération des différents départements et affichage */
 	$res = $link->query("select Login, mdp from Admin");
@@ -43,6 +43,6 @@
 	?>
 	<br><br>
 
-	
+
 </body>
 </html>

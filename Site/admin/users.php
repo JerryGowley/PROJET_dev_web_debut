@@ -1,4 +1,6 @@
-<?php include ('../conn_db.php');
+<?php
+// include ('../conn_db.php');
+include ('../header.php');
 
 ?>
 <!DOCTYPE html>
@@ -10,12 +12,13 @@
 		cursor:pointer;
 	}
 	body {
-		margin-left: 5%;
-		margin-right: 5%;
-
+		margin-left: 15%;
+		margin-right: 15%;
 	}
 
 </style>
+<link rel="stylesheet" media="screen" href="../css/SiteAppli.css">
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <script>
@@ -26,8 +29,8 @@
 </script>
 <body>
 	<h1>Liste des Utilisateurs</h1><br>
-	<a href="index.php" type="button">Revenir a la page de gestion</a><br><br>
-	<a href="AddUser.php" >Ajouter un utilisateur</a><br><br>
+	<a href="index_adm.php" class="btn btn-primary"  >Revenir a la page de gestion</a><br><br>
+	<a href="AddUser.php" class="btn btn-primary" >Ajouter un utilisateur</a><br><br>
 	<label>Champs de recherche</label>
 	<input id="myInput" type="text" placeholder="id, nom, prenom, etc..." />
 	<table class="table table-bordered table-condensed table-striped table-hover" id="myTable">
@@ -101,7 +104,7 @@
 						rows[i].style.display = "";
 					} else {
 						rows[i].style.display = "none";
-					}      
+					}
 				}
 			}
 

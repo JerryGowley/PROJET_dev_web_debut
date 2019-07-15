@@ -2,7 +2,8 @@
 //session_stat();
 $session_id = 1;
 include ('./ScriptPHP/verif.php');
-include ('../conn_db.php');
+// include ('../conn_db.php');
+include ('../header.php');
 
 $id_ticket = $_GET['id'];
 
@@ -83,7 +84,7 @@ catch (PDOException $e) {
 					</th>
 					<td>
 						<form>
-							<input type="text" name="DebutTick"class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
+							<input type="text" colspan="2" size="56" name="DebutTick"class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
 						</form>
 					</td>
 					<th>

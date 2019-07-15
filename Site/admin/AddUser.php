@@ -7,8 +7,9 @@
 	<link rel="stylesheet" media="screen" href="bs337/css/SiteAppli.css">
 </head>
 <body class="container" align="center">
-	<?php 
-	include ('../conn_db.php');
+	<?php
+	// include ('../conn_db.php');
+	include ('../header.php');
 
 	error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 	?>
@@ -40,7 +41,7 @@
 		<br>
 		<br><br>
 		<input type="submit" name="valider" value="valider" required>
-	</form> 
+	</form>
 
 	<?php
 
@@ -60,7 +61,7 @@
 			$sth->execute();
 			header('Location:users.php');
 			exit();
-			
+
 		} catch (PDOException $e) {
 			echo 'Error: ' . $e->getMessage();
 		}

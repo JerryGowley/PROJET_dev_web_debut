@@ -18,11 +18,12 @@
   ?>
   <h1 style="color:#4444ff;text-align:center;">Squicket</h1>
   <br>
-  <a class="btn btn-primary" href="index.php" role="button">Retour a l'accueil</a>
+  <a class="btn btn-primary" style="margin-left:44%;" href="index.php" role="button">Retour a l'accueil</a>
   <br>
   <?php
   /* Connexion à la base de donnée */
-  include('conn_db.php');
+  // include('conn_db.php');
+  include ('../header.php');
 
 
   try {
@@ -35,92 +36,92 @@
 
 
   ?>
-  <h2>CREATION DE TICKET  : </h2>
+  <h2 style="margin-left:34%;">CREATION DE TICKET  : </h2>
   <form method="post">
-    <table class="rounded" >
-      <tbody >
-        <tr >
-        </tr>
-        <tr>
-          <th>
-            <label>Début Incident</label>
-          </th>
-          <td>
-            <form>
-              <input type="date" name="incident_debut" required id="incident_debut">
-            </form>
-          </td>
-          <th>
-            <label>Technicien</label>
-          </th>
-          <td>
-            <input size ="22" autocomplete="off" type="text" name="Technicien" placeholder="Technicien" id="Technicien" required>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="rounded">
-      <tbody>
-        <tr>
-          <th style="width:15%;">Logiciel concerné :</th>
-          <td>
-            <SELECT class="select required form-control select2 select2-offscreen" name="Logiciel" id="Logiciel" required>
-              <?php foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) { ?>
-            <option>  <?php  echo $row->Nom_Logiciel; ?> </option>
-            <?php  } ?>
-            </SELECT>
-          </td>
-          <th >Criticité : </th>
-          <td>
-            <br>
-            <select class="select required form-control select2 select2-offscreen" required name="criticite" id="criticite" required>
-              <option selected="selected" value="low">Faible</option>
-              <option value="normal">Normal</option>
-              <option value="important">Important</option>
-              <option value="critical">Critique</option></select>
-              <br>
-            </td>
-          </tr>
-          <tr>
-            <th colspan="1">Sujet :</th>
-            <td colspan="3">
-              <input size ="64" placeholder="maximum 255 caractères" autocomplete="off" required type="text" name="sujet" id="sujet" required>
-              <br>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="rounded">
-      <tbody>
-        <tr>
-          <th style="width:16.5%;">Description : </th>
-          <td style="width:90%;">
-            <textarea  class="form-control noresize" name="Description" required rows="15" ></textarea>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <input class="btn btn-danger" name="valider" type="submit" required value="Soumettre le ticket">
-  </form>
+		<table class="rounded" >
+			<tbody >
+				<tr >
+				</tr>
+				<tr>
+					<th>
+						<label>Début Incident</label>
+					</th>
+					<td>
+            <input type="text" name="DebutTick" id="DebutTick" class="form-control form-control-sm" value="<?php echo $DebutTick ?>" placeholder="yyyy-mm-dd" required>
+					</td>
+					<th>
+						<label>Technicien</label>
+					</th>
+					<td>
+						<input size ="32" type="text" value="<?php echo $technicien ?>" name="Technicien"  id="Technicien" required>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="rounded">
+			<tbody>
+				<tr>
+					<th style="width:15%;">Logiciel concerné :</th>
+					<td>
+						<input size ="32" type="text" value="<?php echo $Nom_Logiciel ?>" name="Technicien" id="Technicien" required>
+					</td>
+					<th >Criticité : </th>
+					<td>
+						<br>
+						<select class="select required form-control select2 select2-offscreen" required name="criticite" id="criticite" required>
+							<option value="<?php echo $criticite ?>"><?php echo $criticite?></option>
+							<option value="low">Faible</option>
+							<option value="normal">Normal</option>
+							<option value="important">Important</option>
+							<option value="critical">Critique</option></select>
+							<br>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="1">Sujet :</th>
+						<td>
+							<input size="42" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
+							<br>
+					</td>
+					<th>
+						<label>Fin Incident</label>
+					</th>
+					<td>
+							<input type="text" name="FinTick" id="FinTick" class="form-control form-control-sm" value="<?php echo $FinTick ?>" placeholder="yyyy-mm-dd" required>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="rounded">
+			<tbody>
+				<tr>
+					<th style="width:16.5%;">Description : </th>
+					<td style="width:90%;">
+						<textarea  class="form-control noresize" name="Description" required rows="15" ><?php echo $Description ?></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<input class="btn btn-danger" style="margin-left: 45%;" name="valider" type="submit" required value="Créer ticket">
+		<br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 46.2%;"role="button">Retour</a>
+	</form>
+	<br><br>
+	<br>
 
   <?php
   if (isset ($_POST['valider'])){
 
-    $DebutTick=$_POST['incident_debut'];
+    $DebutTick=$_POST['DebutTick'];
+    $FinTick=$_POST['FinTick'];
     $Logiciel=$_POST['Logiciel'];
     $Sujet=$_POST['sujet'];
     $Description=$_POST['Description'];
     $Technicien=$_POST['Technicien'];
     $criticite=$_POST['criticite'];
 
-
-    $escaped_item = mysql_escape_string($Description);
-    printf("Chaîne protégée : %s\n", $escaped_item);
-
     try {
-      $sql = "INSERT INTO Ticket(DebutTick,Logiciel,Sujet,Description,Technicien,criticite) VALUES('$DebutTick','$Logiciel','$Sujet',('$Description'),'$Technicien','$criticite')";
+      $sql = "INSERT INTO Ticket(DebutTick,FinTick,Logiciel,Sujet,Description,Technicien,criticite) VALUES('$DebutTick','$FinTick','$Logiciel','$Sujet','$conexion->quote($Description)','$Technicien','$criticite')";
       $sth = $conexion->prepare($sql,array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
       $sth->execute();
     } catch (PDOException $e) {
