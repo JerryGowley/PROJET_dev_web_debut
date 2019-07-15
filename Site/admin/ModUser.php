@@ -72,17 +72,14 @@ button:hover {
 			Password:<br>
 			<input type="Password" name="mdp" required value="<?php echo $row->usr_pass ?>">
 			<br>
-			Departement:<br>
-			<input type="text" name="depart" required value="<?php echo $row->usr_dep ?>">
-			<br>
-			Ville:<br>
-			<input type="text" name="ville" required value="<?php echo $row->usr_ville ?>">
-			<br>
 			E-mail:<br>
 			<input type="" name="email" required value="<?php echo $row->usr_email ?>">
 			<br>
-			<br>Telephone:<br>
-			<input type="text" name="tel" required value="<?php echo $row->usr_tel ?>">
+			<br>Fonction:<br>
+			<select name="fonction" value="<?php echo $row->usr_fonction ?>" required>
+				<option value="technicien">Technicien</option>
+				<option value="administrateur">Administrateur</option>
+			</select>
 			<br>
 			<br><br>
 			<input type="submit" name="valider" value="valider">
@@ -108,10 +105,8 @@ button:hover {
 		$prenom=$_POST['prenom'];
 		$email=$_POST['email'];
 		$login=$_POST['login'];
-		$mdp=$_POST['mdp'];
-		$depart=$_POST['depart'];
-		$ville=$_POST['ville'];
-		$tel=$_POST['tel'];
+		$mdp=crypt($_POST['mdp']);
+		$fonction=$_POST['fonction'];
 		try {
 
 			$sql = "UPDATE utilisateur
@@ -120,9 +115,7 @@ button:hover {
 			, usr_email='".$email."'
 			, usr_login='".$login."'
 			, usr_pass ='".$mdp."'
-			, usr_dep='".$depart."'
-			, usr_ville='".$ville."'
-			, usr_tel='".$tel."'
+			, usr_fonction='".$fonction."'
 			WHERE usr_id='".$id."'";
 
 			$sth = $conexion->prepare($sql,array());
