@@ -7,8 +7,17 @@ $sth->execute();
 <script>
 window.console = window.console || function(t) {};
 if (document.location.search.match(/type=embed/gi)) {
-	window.parent.postMessage("resize", "*");
+	window.parent.postMe²ssage("resize", "*");
 }
+</script>
+<script id="rendered-js">
+$(document).ready(function($) {
+	$(".table-row").click(function() {
+		window.document.location = $(this).data("href");
+	});
+});
+
+document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 </script>
 
 <!DOCTYPE html>

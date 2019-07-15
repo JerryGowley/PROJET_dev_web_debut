@@ -36,6 +36,8 @@
 			</div>
 			<input class="btn btn-primary" name="submit" type="submit" value="Connexion">
 		</form>
+		<br>
+		<a class="btn btn-primary" href="../index.php" role="button">Retour a l'accueil</a>
 		<?php
 	} else {
 		echo "Erreur de connexion à la base de donnée";
