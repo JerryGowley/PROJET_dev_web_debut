@@ -7,7 +7,7 @@ $sth->execute();
 <script>
 window.console = window.console || function(t) {};
 if (document.location.search.match(/type=embed/gi)) {
-	window.parent.postMe²ssage("resize", "*");
+	window.parent.postMessage("resize", "*");
 }
 </script>
 <script id="rendered-js">
