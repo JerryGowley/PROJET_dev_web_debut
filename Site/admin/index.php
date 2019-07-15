@@ -3,24 +3,19 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Squicket | Connexion</title>
-	<link rel="stylesheet" media="screen" style="text/css" href="css/SiteAppli.css">
+	<link rel="stylesheet" media="screen" style="text/css" href="../css/SiteAppli.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<link rel="icon" href="../img/favicon.png" type="image/x-icon"/>
 	<link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon"/>
 </head>
 <body class="container" align="center">
-	<h1>Outil de ticketing
-	</h1>
-	<br>
-
+	<h1>Outil de ticketing </h1> <br>
 	<?php
 	include ('../header.php');
 	$sql = "SELECT usr_login, usr_pass, usr_fonction FROM utilisateur;";
 	$res = $conexion->prepare($sql);
 	$res->execute();
-	//$res = $link->query("select Login, mdp from Admin");
-	if(isset($res)) {
-		?>
+	if(isset($res)) {      ?>
 		<form method="post" action="./ScriptPHP/connexion.php">
 			<div class="input-group mb-3" id="ordinateur">
 				<div class="input-group-prepend">
@@ -41,10 +36,6 @@
 		<?php
 	} else {
 		echo "Erreur de connexion à la base de donnée";
-	}
-	?>
-	<br><br>
-
-
+	}  ?>
 </body>
 </html>

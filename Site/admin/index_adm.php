@@ -12,7 +12,6 @@ include ('../header.php');
 <body class="container" align="center">
 	<h1>Tickets
 		<br>Interface Admin	<a href="ScriptPHP/logout.php" class="deco"></h1>
-
 			<div class="fadeaway">
 				<img class="imgdeco" style="width:155px;height:155px;" src="../img/avatar.png" title="Déconnexion" alt="Déconnexion">
 				<div class="overlay">

@@ -16,24 +16,23 @@ $(document).ready(function($) {
 		window.document.location = $(this).data("href");
 	});
 });
-
 document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 </script>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-
 	<title>Tickets</title>
-	<link rel="stylesheet" media="screen" href="./css/SiteAppli.css">
+	<link rel="stylesheet" media="screen" href="../css/SiteAppli.css">
 	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
 		<br><br>
-		<a class="btn btn-primary" href="index.php" role="button">Retour a l'accueil</a>
+		<a class="btn btn-primary" href="index_adm.php" role="button">Retour a l'accueil</a>
 		<br><br><br>
 		<table class="table table-bordered table-condensed table-striped table-hover" id="myTable">
 			<thead class="thead-dark">
@@ -66,7 +65,5 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
 					}	?>
 				</tbody>
 			</table>
-			<div class="table-responsive">
-			</div>
 		</body>
-		</html>
+	</html>

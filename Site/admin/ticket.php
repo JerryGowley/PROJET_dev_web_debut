@@ -16,7 +16,7 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 	$FinTick = $row->FinTick;
 	$Logiciel = $row->Logiciel;
 	$sujet = $row->Sujet;
-	$Client = $row->Client;
+	$client = $row->client;
 	$Description = $row->Description;
 	$technicien = $row->Technicien;
 	$criticite = $row->criticite;
@@ -33,8 +33,7 @@ catch (PDOException $e) {
 	echo 'Error: ' . $e->getMessage();
 }
 
-if(isset ($_POST['supprimer']))
-{
+if(isset ($_POST['supprimer'])) {
 	try{
 		$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
 		echo $sql;
@@ -50,6 +49,7 @@ if(isset ($_POST['supprimer']))
 if (isset ($_POST['valider'])){
 	$DebutTick=$_POST['DebutTick'];
 	$FinTick=$_POST['FinTick'];
+	$client=$_POST['client'];
 	$Technicien=$_POST['Technicien'];
 	$Description=$_POST['Description'];
 	$Logiciel=$_POST['Logiciel'];
@@ -62,12 +62,12 @@ if (isset ($_POST['valider'])){
 		DebutTick='".$DebutTick."'
 		, FinTick='".$FinTick."'
 		, Logiciel='".$Logiciel."'
+		, client='".$client."'
 		, Sujet='".$sujet."'
 		, Description =".$conexion->quote($Description)."
 		, Technicien='".$Technicien."'
 		, criticite='".$criticite."'
 		WHERE id='".$id_ticket."'";
-		echo $sql;
 
 		$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();
@@ -77,7 +77,6 @@ if (isset ($_POST['valider'])){
 		echo 'Error: ' . $e->getMessage();
 	}
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -87,34 +86,10 @@ if (isset ($_POST['valider'])){
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/SiteAppli.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-	<style>
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-		margin-left: 12%;
-	}
-	.table-row{
-		cursor:pointer;
-	}
-	tbody
-	{
-		display: table-row-group;
-		vertical-align: middle;
-		border-color: inherit;
-	}
-	.noresize
-	{
-		resize: none;
-	}
-	</style>
 </head>
 <body>
-	<?php error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE); ?>
-	<br>
-	<br> <br>
+	<br> <br> <br>
 	<h1 style="margin-left: 38%;"> Modifier un ticket : </h1>
-
-
 	<form  method="post">
     <table style="margin:auto;" class="rounded" >
       <tbody>
@@ -141,7 +116,7 @@ if (isset ($_POST['valider'])){
         <tr>
           <th style="width:15%;">Logiciel concerné :</th>
           <td>
-            <input style="width:220px" type="text" value="<?php echo $Nom_Logiciel ?>" name="Technicien" id="Technicien" required>
+            <input style="width:220px" type="text" value="<?php echo $Logiciel ?>" name="Logiciel" id="Logiciel" required>
           </td>
           <th >Criticité : </th>
           <td>
@@ -187,8 +162,9 @@ if (isset ($_POST['valider'])){
         </tbody>
       </table>
       <br>
-      <input class="btn btn-danger" style="margin-left: 47%;" name="valider" type="submit" required value="Modifier le ticket">
-      <br><br><a class="btn btn-primary" href="all_adm.php" style="margin-left: 47.8%;"role="button">Retour</a>
+      <input class="btn btn-danger" style="margin-left: 47%;" name="valider" type="submit" required value="Modifier le ticket"><br><br>
+			<input class="btn btn-danger" style="margin-left: 46.5%;" name="supprimer" type="submit" required value="Supprimer le ticket">
+      <br><br><a class="btn btn-primary" href="all_adm.php" style="margin-left: 49%;"role="button">Retour</a>
   	</form>
   </body>
 </html>

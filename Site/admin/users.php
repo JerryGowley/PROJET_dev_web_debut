@@ -26,7 +26,7 @@ include ('../header.php');
 		window.parent.postMessage("resize", "*");
 	}
 </script>
-<body>
+<body style="margin-left:10%;margin-right:10%;">
 	<h1>Liste des Utilisateurs</h1><br>
 	<a href="index_adm.php" class="btn btn-primary"  >Revenir a la page de gestion</a><br><br>
 	<a href="AddUser.php" class="btn btn-primary" >Ajouter un utilisateur</a><br><br>
