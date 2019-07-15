@@ -105,7 +105,7 @@ button:hover {
 		$prenom=$_POST['prenom'];
 		$email=$_POST['email'];
 		$login=$_POST['login'];
-		$mdp=crypt($_POST['mdp']);
+		$mdp=password_hash($_POST['mdp'],PASSWORD_BCRYPT);
 		$fonction=$_POST['fonction'];
 		try {
 

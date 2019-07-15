@@ -16,8 +16,8 @@ include ('../header.php');
       <a class="btn btn-primary" href="index_adm.php" role="button">Retour a l'accueil</a>
       <br><br>
 <form method="POST" action="statistiques.php">
-  <input type="date" name="Date_Ant" value="2019-06-24">
-  <input type="date" name="Date_Post" value="2019-06-25">
+  <input type="date" name="Date_Ant" value="2019-07-09">
+  <input type="date" name="Date_Post" value="2019-07-13">
   <input type="submit">
 </form>
 <br><br>
@@ -31,8 +31,8 @@ if (isset($_POST['Date_Ant']) && isset($_POST['Date_Post']))
 }
 
 $sql = "SELECT Logiciel, COUNT(*) as nb_logiciel FROM ticket GROUP BY Logiciel";
-$sql2 ="SELECT Date_ouverture, COUNT(*) as nb_ticket FROM `ticket` WHERE Date_ouverture BETWEEN '". $date_ant ."' AND '". $date_post ."' GROUP BY Date_ouverture";
-$sql3 ="SELECT Technicien, COUNT(*) as nb_ticket FROM ticket WHERE Date_ouverture BETWEEN '". $date_ant ."' AND '". $date_post ."' GROUP BY Technicien;";
+$sql2 ="SELECT DebutTick, COUNT(*) as nb_ticket FROM ticket WHERE DebutTick BETWEEN '". $date_ant ."' AND '". $date_post ."' GROUP BY DebutTick";
+$sql3 ="SELECT Technicien, COUNT(*) as nb_ticket FROM ticket WHERE DebutTick BETWEEN '". $date_ant ."' AND '". $date_post ."' GROUP BY Technicien;";
 
 
 $sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -62,7 +62,7 @@ foreach($sth3->fetchAll(PDO::FETCH_OBJ) as $row)
     $i = 0;
     foreach($sth2->fetchAll(PDO::FETCH_OBJ) as $row)
       {
-        $dataPoints2[$i] = array("y" => $row->nb_ticket, "label" => $row->Date_ouverture);
+        $dataPoints2[$i] = array("y" => $row->nb_ticket, "label" => $row->DebutTick);
         $i++;
       }
       ?>

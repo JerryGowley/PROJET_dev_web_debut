@@ -1,8 +1,14 @@
 <?php
 $host="localhost";
+<<<<<<< Updated upstream
 $utilisateur="bobo";
 $motdepasse="bobo";
 $base="bobo";
+=======
+  $utilisateur="root";
+  $motdepasse="";
+  $base="bobo";
+>>>>>>> Stashed changes
 
 try  {
   $conexion = new PDO('mysql:host='.$host.';dbname='.$base, $utilisateur, $motdepasse,

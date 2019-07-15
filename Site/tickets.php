@@ -10,15 +10,6 @@ if (document.location.search.match(/type=embed/gi)) {
 	window.parent.postMessage("resize", "*");
 }
 </script>
-<script id="rendered-js">
-$(document).ready(function($) {
-	$(".table-row").click(function() {
-		window.document.location = $(this).data("href");
-	});
-});
-
-document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
-</script>
 
 <!DOCTYPE html>
 <html>
