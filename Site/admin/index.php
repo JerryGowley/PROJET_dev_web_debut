@@ -14,7 +14,6 @@
 	<br>
 
 	<?php
-	// include('../co.php');
 	include ('../header.php');
 
 	$res = $link->query("select Login, mdp from Admin");

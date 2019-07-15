@@ -2,11 +2,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 	<title>Tickets</title>
 	<link rel="stylesheet" media="screen" href="../css/SiteAppli.css">
 	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>
 <script>
@@ -17,10 +16,9 @@ if (document.location.search.match(/type=embed/gi)) {
 </script>
 <?php
 include ('../header.php');
-function tri($type,$argument,$odre)
-{
-	if($type == 1)
-	{
+
+function tri($type,$argument,$odre) {
+	if($type == 1) {
 		$sql = "SELECT * FROM Ticket ORDER BY $argument $odre";
 	}
 	return $sql;
@@ -33,7 +31,6 @@ function tri($type,$argument,$odre)
 		<br><br>
 		<a class="btn btn-primary" href="index_adm.php" role="button">Retour a l'accueil</a>
 		<br><br><br>
-		<!-- <input id="myInput" type="text" /> -->
 		<table class="table table-bordered table-condensed table-striped table-hover" id="myTable">
 			<thead class="thead-dark">
 				<tr>

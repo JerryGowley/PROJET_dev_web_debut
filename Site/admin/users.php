@@ -15,7 +15,6 @@ include ('../header.php');
 		margin-left: 15%;
 		margin-right: 15%;
 	}
-
 </style>
 <link rel="stylesheet" media="screen" href="../css/SiteAppli.css">
 
