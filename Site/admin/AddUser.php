@@ -23,21 +23,17 @@
 		<input type="text" name="nom" placeholder="Mouse" required>
 		<br><br>Login:<br>
 		<input type="text" name="login" placeholder="ThePunisher77" required>
-		<br><br>
+		<br>
 		<br>Password:<br>
 		<input type="Password" name="mdp" placeholder="*******" required>
-		<br>
-		<br>Departement:<br>
-		<input type="text" name="depart" placeholder="77" required>
-		<br>
-		<br>Ville:<br>
-		<input type="text" name="ville" placeholder="Courbevoie" required>
-		<br>
-		<br>email:<br>
-		<input type="email" name="email" placeholder="IciQueTuRentres@email.com" required>
-		<br>
-		<br>Telephone:<br>
-		<input type="text" name="tel" placeholder="0102030405" required>
+		<br><br>
+		E-mail:<br>
+		<input type="" name="email" required placeholder="Mickey.Mouse@disney.com">
+		<br><br>
+		<select name="fonction" required>
+			<option value="technicien">Technicien</option>
+			<option value="administrateur">Administrateur</option>
+		</select>
 		<br>
 		<br><br>
 		<input type="submit" name="valider" value="valider" required>
@@ -51,12 +47,10 @@
 		$prenom=$_POST['prenom'];
 		$email=$_POST['email'];
 		$login=$_POST['login'];
-		$mdp=$_POST['mdp'];
-		$depart=$_POST['depart'];
-		$ville=$_POST['ville'];
-		$tel=$_POST['tel'];
+		$mdp=password_hash($_POST['mdp'],PASSWORD_BCRYPT);
+		$fonction=$_POST['fonction'];
 		try {
-			$sql = "INSERT INTO utilisateur(usr_nom,usr_prenom,usr_email,usr_login,usr_pass,usr_dep,usr_ville,usr_tel) VALUES('$nom','$prenom','$email','$login','$mdp','$depart','$ville','$tel')";
+			$sql = "INSERT INTO utilisateur(usr_nom,usr_prenom,usr_email,usr_login,usr_pass,usr_fonction) VALUES('$nom','$prenom','$email','$login','$mdp','$fonction')";
 			$sth = $conexion->prepare($sql);
 			$sth->execute();
 			header('Location:users.php');
