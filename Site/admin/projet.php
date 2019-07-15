@@ -1,11 +1,41 @@
+<?php
+include ('../header.php');
+
+
+if(isset ($_GET['supprimer'])) {
+  try{
+    $Logiciel=$_GET['Nom_Logiciel'];
+    $sql = "DELETE from Logiciel WHERE Nom_Logiciel='".$Logiciel."'";
+    $sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->execute();
+
+  } catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
+  }
+}
+
+if (isset ($_POST['ajouter'])){
+  $Logiciel=$_POST['Logiciel'];
+  try {
+    $sql = "INSERT INTO Logiciel(Nom_Logiciel) VALUES('$Logiciel')";
+    $sth = $conexion->prepare($sql,array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
+    $sth->execute();
+  } catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
+  }
+}
+
+
+$sql = "SELECT * FROM Logiciel";
+$sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth->execute();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include ('../header.php');
-  $sql = "SELECT * FROM Logiciel";
-  $sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-  $sth->execute();
-  ?>
   <meta charset="UTF-8">
   <title>Projet</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -31,15 +61,17 @@ if (document.location.search.match(/type=embed/gi)) {
       <thead class="thead-dark">
         <tr>
           <th scope="col">Logiciel</th>
+          <th scope="col" >Supprimer</th>
         </tr>
       </thead>
       <tbody>
         <?php
         foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
           ?>
-          <tr class="table-row" data-href="ticket.php?id=<?php echo $row->id ?>">
+          <tr class="table-row">
             <?php
             echo "<td>" . $row->Nom_Logiciel."</td>";
+            echo "<td> <a href=\"projet.php?supprimer=true&Nom_Logiciel=$row->Nom_Logiciel\">sup</a></td>";
             echo "</tr>";
           }
           ?>
@@ -60,49 +92,13 @@ if (document.location.search.match(/type=embed/gi)) {
         </script>
         <script id="rendered-js">
         </script>
-        <form method="post">
+        <form method="post" action="projet.php">
           <br><label style="margin-left:30%;">Veuillez entrer le nom du projet a ajouter ou supprimer svp </label>
           <br><br><input size ="32" style="margin-left:35%;" type="text" name="Logiciel"  id="Logiciel" required>
           <br><br><br>
-          <input class="btn btn-primary" href="index_adm.php" style="margin-left:35%; color:black;" name="ajouter" type="submit" required value="Ajouter projet"></input>
-          <input class="btn btn-primary" href="index_adm.php" style="color:black;" name="supprimer" type="submit" required value="Supprimer projet"></input>
+          <input class="btn btn-primary"  style="margin-left:35%; color:black;" name="ajouter" type="submit" required value="Ajouter projet"></input>
         </form>
 
-        <?php
-        if(isset ($_POST['supprimer'])) {
-          try{
-            $Logiciel=$_POST['Logiciel'];
-            $sql = "DELETE from Logiciel WHERE Nom_Logiciel='".$Logiciel."'";
-            $sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-            $sth->execute();
-            echo "SQL supp execute";
-            header('Location:all_adm.php');
-            exit();
-            echo "redirect supp execute";
-
-          } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-          }
-        }
-
-        if (isset ($_POST['ajouter'])){
-          $Logiciel=$_POST['Logiciel'];
-          try {
-            $Logiciel=$_POST['Logiciel'];
-            $sql = "INSERT INTO Logiciel(Nom_Logiciel) VALUES('$Logiciel')";
-            $sth = $conexion->prepare($sql,array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
-            $sth->execute();
-            echo "add execute";
-            header('Location: all_adm.php');
-            exit();
-            echo "redirect add execute";
-          } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-          }
-        }
-
-
-        ?>
 
       </body>
       </html>
