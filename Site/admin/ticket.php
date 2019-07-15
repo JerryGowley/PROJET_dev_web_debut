@@ -1,6 +1,5 @@
 <?php
 $session_id = 1;
-include ('./ScriptPHP/verif.php');
 include ('../header.php');
 $id_ticket = $_GET['id'];
 try {
@@ -14,6 +13,7 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 	error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 	$id = $row->id;
 	$DebutTick = $row->DebutTick;
+	$FinTick = $row->FinTick;
 	$Logiciel = $row->Logiciel;
 	$sujet = $row->Sujet;
 	$Client = $row->Client;
@@ -32,6 +32,52 @@ try {
 catch (PDOException $e) {
 	echo 'Error: ' . $e->getMessage();
 }
+
+if(isset ($_POST['supprimer']))
+{
+	try{
+		$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
+		echo $sql;
+		$sth = $conexion->prepare($sql,array());
+		$sth->execute();
+		header('Location:all_adm.php');
+		exit();
+	} catch (PDOException $e) {
+		echo 'Error: ' . $e->getMessage();
+	}
+}
+
+if (isset ($_POST['valider'])){
+	$DebutTick=$_POST['DebutTick'];
+	$FinTick=$_POST['FinTick'];
+	$Technicien=$_POST['Technicien'];
+	$Description=$_POST['Description'];
+	$Logiciel=$_POST['Logiciel'];
+	$criticite=$_POST['criticite'];
+	$sujet=$_POST['sujet'];
+	echo $Description;
+	try {
+		$sql = "UPDATE Ticket
+		SET
+		DebutTick='".$DebutTick."'
+		, FinTick='".$FinTick."'
+		, Logiciel='".$Logiciel."'
+		, Sujet='".$sujet."'
+		, Description =".$conexion->quote($Description)."
+		, Technicien='".$Technicien."'
+		, criticite='".$criticite."'
+		WHERE id='".$id_ticket."'";
+		echo $sql;
+
+		$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$sth->execute();
+		header('Location:all_adm.php');
+		exit();
+	} catch (PDOException $e) {
+		echo 'Error: ' . $e->getMessage();
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +158,7 @@ catch (PDOException $e) {
           <tr>
             <th colspan="1"> Nom Client :</th>
             <td>
-              <input size="42" placeholder="maximum 255 caractères" type="text" name="client" id="client" required>
+              <input size="42" placeholder="maximum 255 caractères" value="<?php echo $client ?>"type="text" name="client" id="client" required>
               <br>
             </td>
             <th>
@@ -125,9 +171,7 @@ catch (PDOException $e) {
           <tr>
             <th> Sujet :</th>
             <td colspan="3">
-              <input  size="110" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
-              <br>
-
+              <input  size="105" placeholder="maximum 255 caractères" value="<?php echo $sujet ?>" type="text" name="sujet" id="sujet" required>
             </td>
           </tr>
         </tbody>
@@ -143,63 +187,8 @@ catch (PDOException $e) {
         </tbody>
       </table>
       <br>
-      <input class="btn btn-danger" style="margin-left: 47%;" name="valider" type="submit" required value="Créer ticket">
-      <br><br><a class="btn btn-primary" href="tickets.php" style="margin-left: 47.8%;"role="button">Retour</a>
-    </form>
-
-		
-	<br>
-
-	<?php
-	if(isset ($_POST['supprimer']))
-	{
-		try{
-			$sql = "DELETE from Ticket WHERE id='".$id_ticket."'";
-			echo $sql;
-			$sth = $conexion->prepare($sql,array());
-			$sth->execute();
-			header('Location:all_adm.php');
-			exit();
-		} catch (PDOException $e) {
-			echo 'Error: ' . $e->getMessage();
-		}
-	}
-
-	if (isset ($_POST['valider'])){
-		$DebutTick=$_POST['DebutTick'];
-		$Technicien=$_POST['Technicien'];
-		$Description=$_POST['Description'];
-		$Logiciel=$_POST['Logiciel'];
-		$criticite=$_POST['criticite'];
-		$sujet=$_POST['sujet'];
-		echo $Description;
-		try {
-			$sql = "UPDATE Ticket
-			SET
-			DebutTick='".$DebutTick."'
-			, Logiciel='".$Logiciel."'
-			, Sujet='".$sujet."'
-			, Description =".$conexion->quote($Description)."
-			, Technicien='".$Technicien."'
-			, criticite='".$criticite."'
-			WHERE id='".$id_ticket."'";
-			echo $sql;
-
-			$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			$sth->execute();
-			header('Location:all_adm.php');
-			exit();
-		} catch (PDOException $e) {
-			echo 'Error: ' . $e->getMessage();
-		}
-	}
-	?>
-
-	<footer>
-	</footer>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+      <input class="btn btn-danger" style="margin-left: 47%;" name="valider" type="submit" required value="Modifier le ticket">
+      <br><br><a class="btn btn-primary" href="all_adm.php" style="margin-left: 47.8%;"role="button">Retour</a>
+  	</form>
+  </body>
 </html>
