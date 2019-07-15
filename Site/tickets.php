@@ -16,26 +16,7 @@ $(document).ready(function($) {
 		window.document.location = $(this).data("href");
 	});
 });
-function filterTable(event) {
-	var filter = event.target.value.toUpperCase();
-	var rows = document.querySelector("#myTable tbody").rows;
-	for (var i = 0; i < rows.length; i++) {
-		var col_1 = rows[i].cells[0].textContent.toUpperCase();
-		var col_2 = rows[i].cells[1].textContent.toUpperCase();
-		var col_3 = rows[i].cells[2].textContent.toUpperCase();
-		var col_4 = rows[i].cells[3].textContent.toUpperCase();
-		var col_5 = rows[i].cells[4].textContent.toUpperCase();
-		var col_6 = rows[i].cells[5].textContent.toUpperCase();
-		var col_7 = rows[i].cells[6].textContent.toUpperCase();
-		var col_8 = rows[i].cells[7].textContent.toUpperCase();
-		var col_9 = rows[i].cells[8].textContent.toUpperCase();
-		if (col_1.indexOf(filter) > -1 || col_2.indexOf(filter) > -1 || col_3.indexOf(filter) > -1 || col_4.indexOf(filter) > -1 || col_5.indexOf(filter) > -1 || col_6.indexOf(filter) > -1 || col_7.indexOf(filter) > -1 || col_8.indexOf(filter) > -1 || col_9.indexOf(filter) > -1) {
-			rows[i].style.display = "";
-		} else {
-			rows[i].style.display = "none";
-		}
-	}
-}
+
 document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 </script>
 

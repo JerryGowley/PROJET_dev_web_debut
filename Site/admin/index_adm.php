@@ -1,5 +1,4 @@
 <?php
-// include('../conn_db.php');
 include ('../header.php');
 ?>
 <!DOCTYPE html>
@@ -27,8 +26,5 @@ include ('../header.php');
 	<a class="btn btn-secondary" href="users.php" >Modifier User</a>
 	<a class="btn btn-secondary" href="projet.php" role="button">Gérer les projets</a>
 	<a class="btn btn-secondary" href="statistiques.php">Statistiques</a>
-	<br><br>
-
-	<br><br>
 </body>
 </html>
