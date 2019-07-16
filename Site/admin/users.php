@@ -1,4 +1,15 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page affiche la liste des utilisateurs, en cliquant sur un  //
+//--//utilisateurs l'administrateur peut modifier les champs ou supprimé//
+//--//un utilisateur via la page ModUser.php                            //
+//--//                                                                  //
+//--//La table de la base de donnée est la table utilisateur            //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('../header.php');
 ?>
 

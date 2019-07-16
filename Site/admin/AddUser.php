@@ -1,3 +1,13 @@
+<?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page permet de créer un nouvelle utilisateur dans la base de//
+//--//de donnée, la table dans la base est la table utilisateur         //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

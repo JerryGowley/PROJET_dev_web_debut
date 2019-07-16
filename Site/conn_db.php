@@ -1,6 +1,14 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Page de connexion à la base de donnée, pour pouvoir accéder à     //
+//--//cette base il faut modifier les variable $host, $utilisateur et   //
+//--//$base                                                             //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 $host="localhost";
-
 $utilisateur="bobo";
 $motdepasse="bobo";
 $base="bobo";

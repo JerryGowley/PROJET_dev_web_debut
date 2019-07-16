@@ -1,4 +1,16 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page affiche la liste des tickets, en cliquant sur un ticket//
+//--//la page ticket.php s'affiche, elle affiche la page de modification//
+//--//du ticket avec la possiblité pour les admin de modifier tout les  //
+//--//champs avec la possibilité de supprimé les tickets                //
+//--//                                                                  //
+//--//La table de la base de donnée est la table ticket                 //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('../header.php');
 $sql = "SELECT * FROM Ticket";
 $sth = $conexion->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

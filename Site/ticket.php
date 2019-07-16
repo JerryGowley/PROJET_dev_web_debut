@@ -1,4 +1,16 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page affiche un ticket en fonction du clique sur la //
+//--//page tickets.php, l'utisateur non admin peut modificer certai     //
+//--//champ du ticket                                                   //
+//--//                                                                  //
+//--//                                                                  //
+//--//La table de la base de donnée est la table ticket                 //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 $session_id = 1;
 include ('header.php');

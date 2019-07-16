@@ -1,4 +1,13 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page affiche la liste des projets et permet d'ajouter ou de // 
+//--//supprimer un projet pour les administrateurs.                     //
+//--//La table de la base de donnée est la table Logiciel               //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('../header.php');
 if(isset ($_GET['supprimer'])) {
   try{

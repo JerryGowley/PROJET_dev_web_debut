@@ -1,4 +1,15 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page affiche un ticket en fonction du clique sur la         //
+//--//page tickets.php, l'utisateur admin peut modificer tout les champs//
+//--//du ticket et supprimer le ticket                                  //
+//--//                                                                  //
+//--//La table de la base de donnée est la table ticket                 //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 $session_id = 1;
 include ('../header.php');
 $id_ticket = $_GET['id'];
