@@ -79,7 +79,7 @@ if (document.location.search.match(/type=embed/gi)) {
         <form method="post" action="projet.php">
           <br><label style="margin-left:30%;">Veuillez entrer le nom du projet a ajouter ou supprimer svp </label>
           <br><br><input size ="32" style="margin-left:35%;" type="text" name="Logiciel"  id="Logiciel" required><br><br><br>
-          <input class="btn btn-primary"  style="margin-left:35%; color:black;" name="ajouter" type="submit" required value="Ajouter projet"></input>
+          <input class="btn btn-primary"  style="margin-left:42%; color:white;" name="ajouter" type="submit" required value="Ajouter projet"></input>
         </form>
       </div>
     </body>

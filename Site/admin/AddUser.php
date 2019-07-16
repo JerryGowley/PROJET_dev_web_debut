@@ -50,8 +50,10 @@
 			<option value="administrateur">Administrateur</option>
 		</select>
 		<br><br><br>
-		<input type="submit" name="valider" value="valider" required>
+		<input type="submit" name="valider" value="valider" class="btn btn-primary" required>	<a  name="retour" value="retour" style="margin-left:1%;" class="btn btn-primary" href="users.php" required> retour</a>
+
 	</form>
+
 
 </body>
 </html>

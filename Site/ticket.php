@@ -61,12 +61,14 @@ if (isset ($_POST['valider'])){
 <html>
 <head>
 	<link rel="stylesheet" href="css/SiteAppli.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
 </head>
 <body>
 	<br>
 	<a class="btn btn-primary" href="index.php" style="margin-left: 44%;"role="button">Retour a l'accueil</a>
 	<br> <br>
-	<h1 style="margin-left: 38%;"> Modifier un ticket : </h1>
+	<h3 style="margin-left: 38%;"> Modifier un ticket : </h3>
 	<form  method="post">
 		<table style="margin:auto;" class="rounded" >
 			<tbody>

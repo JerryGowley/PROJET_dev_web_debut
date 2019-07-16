@@ -23,6 +23,9 @@ if (isset ($_POST['valider'])){
     $sql = "INSERT INTO Ticket(DebutTick,FinTick,client,Logiciel,Sujet,Description,Technicien,criticite) VALUES('$DebutTick','$FinTick','$client','$Logiciel','$Sujet','$conexion->quote($Description)','$Technicien','$criticite')";
     $sth = $conexion->prepare($sql,array(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION));
     $sth->execute();
+
+    header('Location:all_adm.php');
+		exit();
   } catch (PDOException $e) {
     echo 'Error: ' . $e->getMessage();
   }
@@ -75,7 +78,7 @@ if (isset ($_POST['valider'])){
         <tr>
           <th style="width:15%;">Logiciel concerné :</th>
           <td>
-            <input style="width:220px" type="text"  name="Technicien" id="Technicien" required>
+            <input style="width:220px" type="text"  name="Logiciel" id="Logiciel" required>
           </td>
           <th >Criticité : </th>
           <td>

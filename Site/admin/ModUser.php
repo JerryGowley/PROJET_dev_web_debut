@@ -80,8 +80,9 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 			<option value="administrateur">Administrateur</option>
 		</select>
 		<br><br><br>
-		<input type="submit" name="valider" value="valider">
-		<input type="submit" name="supprimer" value="supprimer">
+		<input type="submit" name="valider" class="btn btn-primary" value="valider">
+		<input type="submit" name="supprimer" class="btn btn-primary" value="supprimer">
+
 	</form>
 </body>
 </html>
