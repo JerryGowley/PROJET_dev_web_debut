@@ -1,4 +1,15 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page affiche un utlisateur en fonction du clique sur la     //
+//--//page users.php, l'utisateur admin peut modificer tout les champs  //
+//--//de l'utilisateur et supprimer l'utilisateur                       //
+//--//                                                                  //
+//--//La table de la base de donnée est la table utilisateur            //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('../header.php');
 $id=$_GET['id'];
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);

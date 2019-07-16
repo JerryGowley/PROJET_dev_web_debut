@@ -1,4 +1,13 @@
-<?php include 'conn_db.php'; ?>
+<?php include 'conn_db.php'; 
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page contient la connexion à la base de donnée et l'ajout   //
+//--//des bibliothèques bootstrap                                       //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
+?>
 <!doctype html>
 <html>
 <head>

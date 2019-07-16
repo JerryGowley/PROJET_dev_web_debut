@@ -1,4 +1,13 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page est réservé aux administrateurs, elle permet de modifié//
+//--//et créer des utilisateurs, afficher et modifier les tickets et    //
+//--//d'afficher les statistiques.                                      //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('../header.php');
 ?>
 <!DOCTYPE html>

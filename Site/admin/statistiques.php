@@ -1,4 +1,16 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page permet d'afficher différentes statistiques, la liste   //
+//--//des Logiciel concerné pour tout les tickets, le nombre de ticket  //
+//--//par jour dans une plage de date et le nombre de ticket par        //
+//--//technicien dans une plage de date.                                //
+//--//La solution trouvé pour l'affichage des graphiques est canvasJs.  //                                     
+//--//Elle interroge la table Ticket de la BDD.                         //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('../header.php');
 ?>
 <!DOCTYPE HTML>

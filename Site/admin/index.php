@@ -1,3 +1,12 @@
+<?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Formulaire de connexion à la partie adminisrateur du site.        //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

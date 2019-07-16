@@ -1,3 +1,13 @@
+<?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page permet d'accéder à toutes les fonctionnalités de       //
+//--//l'application.                                                    //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

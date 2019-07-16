@@ -1,4 +1,11 @@
 <?php
+//
+//--//////////////////////////////////////////////////////////////////////
+//--//Cette page permet de créer un nouveau ticket.                     //
+//--//                                                                  //
+//--//                Lucas Janet & Boris Laurent                       //
+//--//////////////////////////////////////////////////////////////////////
+//
 include ('header.php');
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 try {
