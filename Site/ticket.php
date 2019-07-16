@@ -46,7 +46,6 @@ if (isset ($_POST['valider'])){
 		,Description =".$conexion->quote($Description)."
 		,criticite='".$criticite."'
 		WHERE id='".$id_ticket."'";
-		echo $sql;
 
 		$sth = $conexion->prepare($sql,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();

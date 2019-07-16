@@ -23,7 +23,7 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"><br>
 	<ul style="width: 77%; margin-left:11.5%;" class="menu">
 		<li><a class="menu" href="index.php" role="button">Home</a></li>
 		<li><a class="menu" href="newtick.php" role="button">Créer un ticket</a></li>
@@ -34,6 +34,7 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
 	<link rel="stylesheet" media="screen" href="./css/SiteAppli.css">
 	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
 </head>
 <body>
 	<div class="container">
@@ -74,4 +75,4 @@ document.querySelector('#myInput').addEventListener('keyup', filterTable, false)
 			<div class="table-responsive">
 			</div>
 		</body>
-		</html>
+	</html>

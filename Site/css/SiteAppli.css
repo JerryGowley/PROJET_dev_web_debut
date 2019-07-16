@@ -4,7 +4,6 @@ label {
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
-  margin-left: 12%;
 }
 .table-row {
   cursor:pointer;
@@ -127,9 +126,7 @@ p.titre{
     display: block;
     align-items: center;
   }
-body {
-  padding-top: 10px;
-}
+  
 .cacher {
   color: #007bff;
 }

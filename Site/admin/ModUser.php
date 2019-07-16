@@ -57,8 +57,8 @@ foreach($sth->fetchAll(PDO::FETCH_OBJ) as $row) {
 <head>
 	<link rel="stylesheet" media="screen" href="../css/SiteAppli.css">
 	<title>Modifier les Users</title>
-</head>
-<body>
+</head><br><br><br>
+<body style="margin-left: 42%;">
 	<form method="post" >
 		Prenom:<br>
 		<input type="text" name="prenom" required value="<?php echo $row->usr_prenom ?>">

@@ -11,7 +11,7 @@ include ('../header.php');
   }
 </style>
     </head>
-    <body>
+    <body style="margin-left:2%; margin-right:2%;">
       <br>
       <a class="btn btn-primary" href="index_adm.php" role="button">Retour a l'accueil</a>
       <br><br>

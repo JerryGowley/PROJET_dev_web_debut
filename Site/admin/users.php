@@ -1,8 +1,7 @@
 <?php
-// include ('../conn_db.php');
 include ('../header.php');
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +10,8 @@ include ('../header.php');
 	.table-row{
 		cursor:pointer;
 	}
-	body {
-		margin-left: 15%;
-		margin-right: 15%;
-	}
 </style>
 <link rel="stylesheet" media="screen" href="../css/SiteAppli.css">
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <script>
@@ -26,10 +20,11 @@ include ('../header.php');
 		window.parent.postMessage("resize", "*");
 	}
 </script>
-<body style="margin-left:10%;margin-right:10%;">
+
+<body style="margin-left:10%;margin-right:250px;">
 	<h1>Liste des Utilisateurs</h1><br>
-	<a href="index_adm.php" class="btn btn-primary"  >Revenir a la page de gestion</a><br><br>
-	<a href="AddUser.php" class="btn btn-primary" >Ajouter un utilisateur</a><br><br>
+	<a href="index_adm.php" style="margin-left:90px;" class="btn btn-primary">Revenir a la page de gestion</a><br><br>
+	<a href="AddUser.php" style="margin-left:90px;" class="btn btn-primary">Ajouter un utilisateur</a><br><br>
 	<table class="table table-bordered table-condensed table-striped table-hover" id="myTable">
 		<thead class="thead-dark">
 			<tr>
@@ -65,12 +60,6 @@ include ('../header.php');
 				</tr>
 			</tbody>
 		</table>
-		<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script id="rendered-js">
 			$(document).ready(function($) {
 				$(".table-row").click(function() {
